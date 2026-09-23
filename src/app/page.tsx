@@ -2,6 +2,7 @@ import InteractiveMap from "@/components/InteractiveMap";
 import { Quote, Route, SecHead, Statement } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
 import EventList from "@/components/site/EventList";
+import LazyVideo from "@/components/site/LazyVideo";
 import Panels, { type PanelItem } from "@/components/site/Panels";
 import Pic from "@/components/site/Pic";
 import Rail from "@/components/site/Rail";
@@ -84,11 +85,9 @@ export default function Home() {
           </div>
           <div className="feature-media frame frame-video" data-clip>
             <Pic src="2019/11/kriya-in-ashram.jpg" alt="" />
-            <iframe
+            <LazyVideo
               title="Shiva Kriya Yoga en el Ashram"
               src="https://customer-lgjk79hzuw551moh.cloudflarestream.com/99b40440ead09357ddca16401d5c3012/iframe?muted=true&loop=true&autoplay=true&controls=false&preload=auto"
-              allow="autoplay; encrypted-media"
-              loading="lazy"
             />
           </div>
         </div>

@@ -70,13 +70,22 @@ export default function Motion() {
       });
     });
 
-    // Images load after layout: keep trigger positions accurate.
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    const t = setTimeout(refresh, 400);
+    // Images carry width/height, so only web fonts can shift the layout.
+    // Refresh once they are ready, and never while the visitor is scrolling
+    // (a refresh mid-scroll re-pins the cloud intro and makes it flicker).
+    let cancelled = false;
+    const onScrollEnd = () => {
+      ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
+      if (!cancelled) ScrollTrigger.refresh();
+    };
+    document.fonts.ready.then(() => {
+      if (cancelled) return;
+      if (window.scrollY < 4) ScrollTrigger.refresh();
+      else ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
+    });
     return () => {
-      clearTimeout(t);
-      window.removeEventListener("load", refresh);
+      cancelled = true;
+      ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
       ctx.revert();
     };
   }, [pathname]);

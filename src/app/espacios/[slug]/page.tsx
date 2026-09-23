@@ -31,7 +31,7 @@ export default async function Page({ params }: Props) {
         <div className="wrap intro-cols" style={{ marginTop: 0 }}>
           <p className="t-label">{e.kind}</p>
           <div className="prose" data-reveal="stagger">
-            <p style={{ fontFamily: "var(--display)", fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)", lineHeight: 1.35 }}>{e.text}</p>
+            <p style={{ fontFamily: "var(--reading)", fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)", lineHeight: 1.35 }}>{e.text}</p>
             <p>
               <TLink href="/espacios/" className="link-arrow">
                 ← Todos los espacios

@@ -2,6 +2,12 @@ import type { Block } from "@/data/pages";
 import Pic from "./Pic";
 import Rich, { plain } from "./Rich";
 
+// MC Merchant is wide: shrink hero titles whose longest word would not fit.
+function heroTitleSize(title: string) {
+  const longest = Math.max(...title.split(/\s+/).map((w) => w.length));
+  return longest > 10 ? { fontSize: `min(clamp(2.4rem, 6vw, 5.8rem), ${(84 / (longest * 0.82)).toFixed(2)}vw)` } : undefined;
+}
+
 export function PageHero({ eyebrow, title, lead, image, foot }: { eyebrow: string; title: string; lead?: string; image: string; foot?: string }) {
   return (
     <section className="hero">
@@ -12,7 +18,7 @@ export function PageHero({ eyebrow, title, lead, image, foot }: { eyebrow: strin
         <p className="t-label" data-reveal>
           {eyebrow}
         </p>
-        <h1 className="t-display t-xxl" data-reveal>
+        <h1 className="t-display t-xxl" style={heroTitleSize(title)} data-reveal>
           {title}
         </h1>
         {lead && (

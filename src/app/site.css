@@ -9,10 +9,10 @@
   --crema-2: 237 229 215; /* panels, footer */
   --line: rgb(var(--noche) / 0.09);
   --gutter: clamp(1rem, 2.2vw, 1.5rem);
-  /* MC Merchant (caps only, no italic; Spanish accents added to the file).
-     Cormorant stays as fallback for missing glyphs and for long reading text. */
-  --display: var(--font-display), var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  --reading: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  /* MC Merchant (caps only, no italic; Spanish accents added to the file)
+     only for big, short titles. Spectral for every longer serif text. */
+  --display: var(--font-display), var(--font-serif), Spectral, Georgia, serif;
+  --reading: var(--font-serif), Spectral, Georgia, serif;
   --cond: var(--font-cond), "Oswald", "Arial Narrow", sans-serif;
   --body: var(--font-sans), "Inter Tight", Inter, system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -66,16 +66,16 @@ a {
   font-size: clamp(1.6rem, 2.6vw, 2.4rem);
 }
 .t-italic {
-  font-family: var(--display);
-  font-style: normal;
+  font-family: var(--reading);
+  font-style: italic;
   font-weight: 400;
   text-transform: none;
 }
 .t-label {
-  font-family: var(--display);
-  font-style: normal;
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
+  font-family: var(--reading);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.05rem;
   line-height: 1.2;
   color: rgb(var(--malva));
 }
@@ -87,6 +87,14 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-weight: 400;
+}
+/* Headings that are too long for MC Merchant. */
+.t-serif {
+  font-family: var(--reading);
+  font-weight: 300;
+  text-transform: none;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 .t-caps {
   font-size: 0.75rem;
@@ -453,8 +461,12 @@ a {
 .statement {
   max-width: 1180px;
 }
+/* Long statement: Spectral, uppercase like the reference. */
 .statement .t-display {
-  font-size: clamp(1.6rem, 2.9vw, 2.6rem);
+  font-family: var(--reading);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.7rem, 3.1vw, 2.8rem);
   line-height: 1.08;
   margin: 0;
 }
@@ -686,7 +698,7 @@ a.card:hover .card-media img {
   padding: 1.5rem 0;
   cursor: pointer;
   list-style: none;
-  font-family: var(--display);
+  font-family: var(--reading);
   font-size: clamp(1.3rem, 2vw, 1.75rem);
   line-height: 1.2;
 }
@@ -821,7 +833,7 @@ a.card:hover .card-media img {
 }
 .quote-mark {
   display: block;
-  font-family: var(--display);
+  font-family: var(--reading);
   font-size: 3rem;
   line-height: 1;
   color: rgb(var(--terracota));
@@ -1344,8 +1356,8 @@ a.card:hover .card-media img {
   font-size: 0.95rem;
 }
 .contact-list li > span:first-child {
-  font-family: var(--display);
-  font-style: normal;
+  font-family: var(--reading);
+  font-style: italic;
   font-size: 1.1rem;
   color: rgb(var(--malva));
 }

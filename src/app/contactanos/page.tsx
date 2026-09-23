@@ -14,7 +14,7 @@ export default function Page() {
         <div className="wrap contact-grid">
           <div className="contact-info" data-reveal="stagger">
             <p className="t-label">Escríbenos</p>
-            <h2 className="t-display t-l">Para contactarte con un representante del Ashram</h2>
+            <h2 className="t-display t-serif t-l">Para contactarte con un representante del Ashram</h2>
             <div className="prose">
               <p>
                 Puedes hacernos llegar tu mensaje completando el formulario. Si quieres saber más sobre las próximas

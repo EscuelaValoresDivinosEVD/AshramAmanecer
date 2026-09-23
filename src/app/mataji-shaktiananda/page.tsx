@@ -17,7 +17,7 @@ export default function Page() {
         <div className="wrap feature">
           <div className="feature-copy" data-reveal="stagger">
             <p className="t-label">{mataji.name}</p>
-            <h2 className="t-display t-xl">Discípula directa del Mahavatar Babaji</h2>
+            <h2 className="t-display t-serif t-xl">Discípula directa del Mahavatar Babaji</h2>
             <div className="prose">
               {mataji.text.map((t, i) => (
                 <p key={i}>{t}</p>

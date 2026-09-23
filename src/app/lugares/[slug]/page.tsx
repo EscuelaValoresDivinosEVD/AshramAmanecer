@@ -6,7 +6,8 @@ import { getPlace, places } from "@/data/places";
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
-export const generateStaticParams = () => places.map((p) => ({ slug: p.slug }));
+// Identified buildings open their real /espacios/ page; only the rest need this provisional one.
+export const generateStaticParams = () => places.filter((p) => !p.href).map((p) => ({ slug: p.slug }));
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const place = getPlace((await params).slug);

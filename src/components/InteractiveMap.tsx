@@ -136,7 +136,7 @@ export default function InteractiveMap() {
     const b = stage.current!.querySelector<HTMLElement>(`[data-slug="${p.slug}"]`)!.getBoundingClientRect();
     gsap.set(zoom.current, { transformOrigin: `${b.left + b.width / 2 - z.left}px ${b.top + b.height / 2 - z.top}px` });
     gsap.to(zoom.current, { scale: 2.6, duration: 1.2, ease: "power3.in" });
-    navigate(`/lugares/${p.slug}/`);
+    navigate(p.href ?? `/lugares/${p.slug}/`);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {

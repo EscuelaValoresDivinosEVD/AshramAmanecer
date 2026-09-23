@@ -1,0 +1,177 @@
+{
+  "intro": "El Ashram cuenta con hermosos espacios destinados a la práctica de Shiva Kriya Yoga, Hatha Yoga, meditación y contemplación, los cuales diariamente son activados con los códigos milenarios de los mantras y las formas rituales védicas. Su diseño arquitectónico bajo los principios de la geometría sagrada y en armonía con el ecosistema, crean la atmósfera más adecuada para una experiencia única de paz y conexión interna.",
+  "espacios": [
+    {
+      "slug": "maha-mrityunjaya-mandir",
+      "name": "Maha Mrityunjaya Mandir",
+      "kind": "Templo principal",
+      "text": "El templo principal del Ashram está consagrado a la fuerza cósmica regente: el Señor Shiva. Se trata de una obra arquitectónica basada en los principios de la geometría sagrada, donde se halla Mahamrityunjaya Mahadev, el generador de luz (Shiva Lingam) que irradia su potente vibración hacia todo el continente americano. A su vez, este templo alberga un Shiva Lingam de mercurio, construido bajo los más elevados preceptos de la alquimia védica.",
+      "images": [
+        "/img/espacios/maham11.webp",
+        "/img/espacios/maham5-1.webp",
+        "/img/espacios/maham8-1.webp"
+      ]
+    },
+    {
+      "slug": "devi-mandir",
+      "name": "Devi Mandir",
+      "kind": "Templo de la Madre Divina",
+      "text": "El Devi Mandir es el espacio de luz consagrado a la Fuerza Madre en el Ashram Caminantes del Amanecer. Este hermoso templo se ha realizado bajo las formas más precisas de la arquitectura y la geometría sagrada. Su diseño de dos pisos o chakras, basado en las manifestaciones de la Fuerza Shakti más poderosas, hacen a este espacio único en el mundo, por la concepción y distribución de los aspectos de la Madre Divina de acuerdo con sus más altas formas de conocimiento.",
+      "images": [
+        "/img/espacios/devis15.webp",
+        "/img/espacios/devi-mandir-2.webp",
+        "/img/espacios/devi1-1.webp",
+        "/img/espacios/devi-mandir.webp",
+        "/img/espacios/devi-mandir-3.webp"
+      ]
+    },
+    {
+      "slug": "tryambakeshwar-y-dhuni",
+      "name": "Tryambakeshwar y Dhuni",
+      "kind": "Punto panorámico",
+      "text": "En este espacio, que se encuentra en un punto panorámico del Ashram, habita el segundo Shiva Lingam del Ashram llamado Tryambakeshwar, siendo una réplica de su homónimo que se halla en la India, en uno de los 12 templos de los Jyotirlingam consagrados al Señor Shiva. Lo antecede un dhuni o espacio dispuesto para realizar Homa o fuego sagrados. En India, un dhuni es el lugar en donde habita un yogui, quien dedica su vida a su trabajo interno.",
+      "images": [
+        "/img/espacios/dhuni10.webp",
+        "/img/espacios/dhuni.webp",
+        "/img/espacios/dhuni11.webp",
+        "/img/espacios/dhuni1.webp"
+      ]
+    },
+    {
+      "slug": "hanuman-mandir",
+      "name": "Hanuman Mandir",
+      "kind": "Templo de la devoción",
+      "text": "Construido por los devotos de este aspecto divino, está ubicado en una elevación que permite maravillosas vistas de los atardeceres del Ashram. Hanuman, es el ejemplo de entrega y devoción hacia el Guru. Su valor y su arrojo están determinados por la fe y el amor, las más elevadas virtudes del Ser. Su emanación, protege a los seres de las energías negativas en los planos astrales y mentales. Todos los sábados por la tarde en este espacio se recita la Hanuman Chalisa junto con el arati de cierre.",
+      "images": [
+        "/img/espacios/hanuman2.webp",
+        "/img/espacios/hanuman1.webp",
+        "/img/espacios/hanuman9.webp",
+        "/img/espacios/hanuman12.webp"
+      ]
+    },
+    {
+      "slug": "ganesha-hanuman-mandir",
+      "name": "Ganesha & Hanuman Mandir",
+      "kind": "Templo de bienvenida",
+      "text": "Un pequeño templo que da la bienvenida a Caminantes del Amanecer, consagrado a la energía de Ganesha -el Dios-Elefante- conocido como “el que elimina los obstáculos”. Es también quien regula el trabajo de cada alma con sus contenidos negativos, según su capacidad y resolución, colocando ante la conciencia, los aspectos que cada ser está preparado para trabajar. A su vez, allí se encuentra una escultura de Hanuman -el Dios Mono-, símbolo de devoción y protección.",
+      "images": [
+        "/img/espacios/ganeshanuman3.webp",
+        "/img/espacios/ganeshanuman2.webp",
+        "/img/espacios/ganeshanuman6.webp",
+        "/img/espacios/ganeshanuman14.webp"
+      ]
+    },
+    {
+      "slug": "havan",
+      "name": "Havan",
+      "kind": "Espacio del Fuego Sagrado",
+      "text": "Este espacio destinado a la realización del Fuego Sagrado, es una de las primeras construcciones que formaron parte del Ashram. Posee un hermoso diseño con líneas geométricas, con una imponente vista a las montañas y a la laguna Shiva Kunda. En su interior residen las imágenes de Shiva Mahamrityunjaya y Devi Gayatri. Aquí el contacto con el elemento fuego es una experiencia de elevada comunión.",
+      "images": [
+        "/img/espacios/havan2.webp",
+        "/img/espacios/havan4.webp",
+        "/img/espacios/havan8.webp",
+        "/img/espacios/havan3.webp",
+        "/img/espacios/havan.webp"
+      ]
+    },
+    {
+      "slug": "yoga-shala",
+      "name": "Yoga Shala",
+      "kind": "Salón de práctica",
+      "text": "Imponentes vistas y un cautivador diseño, hacen de este espacio un lugar perfecto para la práctica de Shiva Hatha Yoga, Shiva Tandava Kundalini, meditación y sadhana (práctica personal). Además, es el espacio desde donde Mataji Shaktiananda imparten las enseñanzas de Shiva Kriya Yoga a cientos de Iniciados durante todo el año, junto con Satsang y otras actividades.",
+      "images": [
+        "/img/espacios/yogashala4.webp",
+        "/img/espacios/yoga-shala.webp",
+        "/img/espacios/yogashala11.webp"
+      ]
+    },
+    {
+      "slug": "babaji-guffa",
+      "name": "Babaji Guffa",
+      "kind": "Cueva de Babaji",
+      "text": "Construida bajo tierra, es un cueva para meditar en silencio y en total aislamiento en la frecuencia de la Conciencia Babaji. Es un espacio sutilmente consagrado con distintos manifiestos de este Ser Inmortal, por lo que la conexión interna que allí se logra es una experiencia única en América. Mantener los ojos abiertos o cerrados resulta lo mismo aquí, ya que nada se ve hacia afuera, sino solamente los contenidos internos que guarda cada meditador.",
+      "images": [
+        "/img/espacios/babaji6.webp",
+        "/img/espacios/babaji19.webp",
+        "/img/espacios/babaji9.webp",
+        "/img/espacios/babaji17.webp",
+        "/img/espacios/babaji18.webp",
+        "/img/espacios/babaji16.webp"
+      ]
+    },
+    {
+      "slug": "lahiri-guffa",
+      "name": "Lahiri Guffa",
+      "kind": "Cueva de Lahiri",
+      "text": "Desde el centro del Ashram, una caminata de 5 minutos entre colibríes y bromelias, lleva a un mágico lugar, con vistas imponentes de los Andes y con una cascada que se acopla armoniosamente al silencio reinante. Esta cueva natural que se aloja debajo de una roca gigante, está dedicada a la energía de Lahiri Mahasaya, un Maestro infinito, que vivió en India entre los años 1828 y 1895. Su ambientación es perfecta para retiros en solitario de meditación y práctica de Kriya Yoga.",
+      "images": [
+        "/img/espacios/lahiri10.webp",
+        "/img/espacios/lahiri15.webp",
+        "/img/espacios/lahiri5.webp",
+        "/img/espacios/lahiri7.webp",
+        "/img/espacios/lahiri11.webp",
+        "/img/espacios/lahiri6.webp"
+      ]
+    },
+    {
+      "slug": "amrita-shala",
+      "name": "Amrita Shala",
+      "kind": "Salón de los Maestros",
+      "text": "Es el salón de los Maestros Inmortales. Un cálido espacio construido en madera, para meditar en la presencia divina de Maestros que nos han inspirado con su ejemplo de vida y enseñanza.",
+      "images": [
+        "/img/espacios/maestros8.webp",
+        "/img/espacios/maestros3.webp",
+        "/img/espacios/maestros16.webp"
+      ]
+    },
+    {
+      "slug": "salon-saraswati",
+      "name": "Salón Saraswati",
+      "kind": "Biblioteca",
+      "text": "Es la biblioteca del Ashram. Además de textos sagrados, esotéricos, de espiritualidad en español e inglés, posee piezas de arte y objetos de todo el mundo, vinculados a diversos lugares de luz del planeta.",
+      "images": [
+        "/img/espacios/biblioteca-2.webp",
+        "/img/espacios/biblio3.webp",
+        "/img/espacios/biblio12.webp",
+        "/img/espacios/biblio11.webp",
+        "/img/espacios/biblioteca.webp"
+      ]
+    },
+    {
+      "slug": "shiva-kunda",
+      "name": "Shiva Kunda",
+      "kind": "Laguna",
+      "text": "Es el pequeño lago del Ashram. Su agua conducida naturalmente desde el manantial que brota de la cima de la montaña, baña en forma de pequeña cascada un lingam. En el centro se encuentra una estatua del Señor Shiva. Es un espacio perfecto para lectura, escritura, meditación y contemplación.",
+      "images": [
+        "/img/espacios/shivakunda7.webp",
+        "/img/espacios/shivakunda2.webp",
+        "/img/espacios/shivakunda1.webp",
+        "/img/espacios/shivakunda3.webp"
+      ]
+    },
+    {
+      "slug": "jardin-zen",
+      "name": "Jardín Zen",
+      "kind": "Jardín japonés",
+      "text": "Meditar en el dodecaedro de cobre, escribir, contemplar su cascada, realizar los saludos al Sol, practicar Shiva Hatha Yoga individual, son algunas de las experiencias únicas que te esperan en este diseño japonés, de simplicidad elegante.",
+      "images": [
+        "/img/espacios/zen4.webp",
+        "/img/espacios/zen5.webp",
+        "/img/espacios/zen3.webp",
+        "/img/espacios/zen10.webp"
+      ]
+    },
+    {
+      "slug": "cruz-celta",
+      "name": "Cruz Celta",
+      "kind": "Espacio al aire libre",
+      "text": "Es un espacio al aire libre, rodeado de drusas de amatista que generan un campo energético perfecto para la meditación y contemplación, en comunión con la energía del Sagrado Corazón de Jesús que se encuentra en su centro.",
+      "images": [
+        "/img/espacios/cruz4.webp",
+        "/img/espacios/cruz6.webp",
+        "/img/espacios/cruz3.webp",
+        "/img/espacios/cruz9.webp"
+      ]
+    }
+  ]
+}

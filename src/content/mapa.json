@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "havan",
+    "name": "Havan",
+    "tagline": "Espacio del Fuego Sagrado",
+    "href": "/espacios/havan/"
+  },
+  {
+    "slug": "tryambakeshwar-y-dhuni",
+    "name": "Tryambakeshwar y Dhuni",
+    "tagline": "Punto panorámico",
+    "href": "/espacios/tryambakeshwar-y-dhuni/"
+  },
+  {
+    "slug": "devi-mandir",
+    "name": "Devi Mandir",
+    "tagline": "Templo de la Madre Divina",
+    "href": "/espacios/devi-mandir/"
+  },
+  {
+    "slug": "casa-blanca",
+    "name": "Casa Blanca",
+    "tagline": "Hospedaje con vista a la montaña",
+    "href": ""
+  },
+  {
+    "slug": "kiosco",
+    "name": "Kiosco",
+    "tagline": "Pausa entre caminos",
+    "href": ""
+  },
+  {
+    "slug": "comedor",
+    "name": "Comedor e Invernadero",
+    "tagline": "Alimento consciente, cultivado aquí",
+    "href": ""
+  },
+  {
+    "slug": "piramide",
+    "name": "Pirámide",
+    "tagline": "Silencio y contemplación",
+    "href": ""
+  },
+  {
+    "slug": "shiva-kunda",
+    "name": "Shiva Kunda",
+    "tagline": "La laguna del Ashram",
+    "href": "/espacios/shiva-kunda/"
+  },
+  {
+    "slug": "cabana-del-jardin",
+    "name": "Cabaña del Jardín",
+    "tagline": "Entre flores y senderos",
+    "href": ""
+  },
+  {
+    "slug": "maha-mrityunjaya-mandir",
+    "name": "Maha Mrityunjaya Mandir",
+    "tagline": "Templo principal",
+    "href": "/espacios/maha-mrityunjaya-mandir/"
+  },
+  {
+    "slug": "casa-del-mirador",
+    "name": "Casa del Mirador",
+    "tagline": "Amaneceres sobre las nubes",
+    "href": ""
+  },
+  {
+    "slug": "yoga-shala",
+    "name": "Yoga Shala",
+    "tagline": "Salón de práctica",
+    "href": "/espacios/yoga-shala/"
+  }
+]

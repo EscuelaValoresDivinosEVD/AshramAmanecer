@@ -1,0 +1,51 @@
+{
+  "path": "/lineamientos/",
+  "eyebrow": "Estadía",
+  "title": "Lineamientos",
+  "hero": "/img/lineamientos/headerlineamientos.webp",
+  "lead": "Se recomienda seguir los Lineamientos de Amor para alcanzar una conducta armónica que beneficie al espacio y a todos los seres que aquí habitan.",
+  "blocks": [
+    {
+      "type": "infobox",
+      "title": "Para alojarse en el Ashram",
+      "items": [
+        {
+          "text": "Se debe contar con un seguro médico que cubra toda la estadía y que contratará directamente el huésped. Además es un requisito migratorio para ingresar a Ecuador."
+        },
+        {
+          "text": "Se recomienda disponerse en actitud introspectiva, practicar divino silencio, para propiciarse el contacto interno y obtener así el máximo beneficio que brinda este espacio."
+        },
+        {
+          "text": "Se respeta el celibato durante la estadía."
+        },
+        {
+          "text": "Se debe respetar el silencio en los espacios destinados a las prácticas personales y grupales de meditación, kriya y hatha yoga."
+        },
+        {
+          "text": "Los desechos se dividen en reciclables (plásticos, vidrio, papel, etc) y orgánicos (que se utilizan para la fabricación de abonos)."
+        },
+        {
+          "text": "En función de alinearse con las formas y atmósfera del Ashram, es necesario atender las actividades diarias que se proponen."
+        },
+        {
+          "text": "El horario de silencio para garantizar el buen descanso es de 9 pm a 6 am."
+        },
+        {
+          "text": "No está permitido tomar fotos en los interiores de los espacios."
+        },
+        {
+          "text": "El material de lectura es para ser utilizado sólo en la biblioteca Saraswati. No está permitido su uso fuera de este espacio."
+        },
+        {
+          "text": "No se permite el consumo de alcohol, tabaco, sustancias estimulantes, ni drogas de ningún tipo."
+        },
+        {
+          "text": "Los visitantes no están autorizados a manipular los elementos de ceremonial de los espacios de meditación, templos, etc."
+        },
+        {
+          "text": "No está permitido darle de comer a los animales. En el Ashram viven burros, alpacas y dos vacas."
+        }
+      ]
+    }
+  ]
+}

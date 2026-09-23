@@ -12,7 +12,7 @@ export default function Page() {
       <PageHero
         eyebrow="Estadía"
         title="Tu estadía en el Ashram"
-        image="2019/01/22-1.jpg"
+        image="/img/hospedaje/22-1.webp"
         lead="El Ashram ofrece una cuidada infraestructura de habitaciones y amenidades para garantizar una estadía confortable a todos sus huéspedes."
       />
       <MorePages current="/estadias/" limit={99} title="Todo para tu visita" />

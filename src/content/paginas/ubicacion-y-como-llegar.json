@@ -1,0 +1,68 @@
+{
+  "path": "/estadias/ubicacion-y-como-llegar/",
+  "eyebrow": "Estadía",
+  "title": "Ubicación y cómo llegar",
+  "hero": "/img/como-llegar/header-ubicacion2.webp",
+  "lead": "**Ubicado a tan sólo 30min. de la Ciudad de Cuenca-Ecuador**, Caminantes del Amanecer está localizado en 50 hectáreas montañosas de bosque primario andino, que brindan una experiencia única de paz y conexión interna.",
+  "blocks": [
+    {
+      "type": "intro",
+      "text": [
+        "Su belleza natural y su diseño arquitectónico en armonía con el ecosistema es un factor muy especial. Las verdes montañas, la innumerable variedad de flores, las bellas cascadas, el cantar de los pájaros, amaneceres imponentes y atardeceres inolvidables, hacen de Caminantes del Amanecer el lugar perfecto para aquellas personas que buscan un encuentro con su Ser."
+      ]
+    },
+    {
+      "type": "route",
+      "from": "Cuenca",
+      "to": "Ashram",
+      "title": "30 minutos",
+      "text": "Sustag, zona rural en las afueras de Cuenca. A 3.100 m s.n.m., muy cerca del Parque Nacional El Cajas."
+    },
+    {
+      "type": "details",
+      "eyebrow": "Cómo llegar por vía aérea",
+      "title": "Aeropuertos",
+      "groups": [
+        {
+          "title": "Aeropuerto Mariscal Lamar, Cuenca",
+          "lines": [
+            "Es un aeropuerto nacional, con vuelos domésticos diarios desde y hacia los aeropuertos internacionales de Quito y Guayaquil (escalas obligatorias para quienes viajen desde el exterior).",
+            "Se encuentra a 15 minutos en taxi del centro de la ciudad y del Ashram urbano Morada del Colibrí. El viaje tiene un costo de $3 aproximadamente.",
+            "**Código IATA:** CUE · **Web:** aeropuertocuenca.ec · **Teléfonos:** (+593) 7 2867120 / 2862095"
+          ]
+        },
+        {
+          "title": "Aeropuerto Internacional José Joaquín de Olmedo, Guayaquil",
+          "lines": [
+            "Es el aeropuerto internacional más cercano. Opera con vuelos diarios a toda América y también a algunas ciudades de Europa.",
+            "Hay servicios de van hacia Cuenca durante todo el día. El viaje es de 2.30 horas y el costo es de $15",
+            "**Código IATA:** GYE · **Web:** tagsa.aero · **Teléfono:** (+593) 4 2169000"
+          ]
+        },
+        {
+          "title": "Aeropuerto Internacional Mariscal Sucre, Quito",
+          "lines": [
+            "Es el principal aeropuerto del país. Opera con vuelos diarios a todo América y Europa.",
+            "Está alejado de la ciudad y el viaje puede durar 1 hora en taxi (costo aproximado $30) y 2 horas en bus local ($2). También hay servicios de van al centro de Quito ($25) y buses express ($8) con amplia frecuencia entre las 5.30 am y 10 pm.",
+            "**Código IATA:** UIO · **Web:** aeropuertoquito.aero · **Teléfono:** (+593) 2 3954200"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "details",
+      "eyebrow": "Cómo llegar por vía terrestre",
+      "title": "Terminal Terrestre, Cuenca",
+      "groups": [
+        {
+          "title": "Terminal Terrestre",
+          "lines": [
+            "Se encuentra a 15 minutos del centro de la ciudad y del Ashram urbano Morada del Colibrí. Tiene servicios de buses diarios hacia y desde todo el país, incluyendo los trayectos desde los pasos fronterizos de Perú y Colombia (éste último, vía Quito)",
+            "El costo del viaje en taxi desde la Terminal hacia el centro de Cuenca es aproximadamente $3",
+            "**Dirección:** Avenida España y Sebastián Benalcázar · **Teléfono:** (+593) 7 2842107 / 2835535"
+          ]
+        }
+      ]
+    }
+  ]
+}

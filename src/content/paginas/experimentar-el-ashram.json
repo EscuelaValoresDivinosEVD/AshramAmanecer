@@ -1,0 +1,105 @@
+{
+  "path": "/experimentar-el-ashram/",
+  "eyebrow": "Experimentar",
+  "title": "Experimentar el Ashram",
+  "hero": "/img/experimentar/1-19-scaled-1.webp",
+  "lead": "El Ashram tiene un **diseño de activación diario** en el que todos sus espacios de luz reciben las consagraciones más puras y exactas de la Tradición Védica y en las cuales todos los seres que participan reciben sus potentes emisiones de luz y fuerza.",
+  "blocks": [
+    {
+      "type": "intro",
+      "text": [
+        "Además de las actividades especiales programadas mensualmente, diariamente se contemplan clases de Shakti Yoga y Tandava Kundalini, junto con la realización opcional de Karma Yoga y espacios de tiempo libre para la introspección, la contemplación y el sadhana personal.",
+        "**Al momento las estadías por fuera de las actividades mensuales están destinadas únicamente a Iniciados de la EVD.**"
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Homa Vidya",
+      "title": "Fuego Sagrado",
+      "image": "/img/experimentar/fuego-1.webp",
+      "text": [
+        "Dentro del Sanatam Dharma (Espiritualidad Universal) la realización del Fuego Sagrado es la ceremonia de conexión más importante y representativa de los Vedas, es la más elevada sabiduría de purificación y conexión con las Esferas de Luz regentes.",
+        "Hace más de 13,000 años, el Fuego Sagrado fue entregado a la humanidad como parte de los Códigos de Ascensión. En el transcurso del tiempo, esta información ha sido reactivada, presentando una oportunidad para acelerar los procesos evolutivos tanto a nivel individual como colectivo. La realización del ritual del Fuego Sagrado implica la aplicación de una ciencia cósmica que va más allá de los logros de la ciencia contemporánea. Es aprender a crear campos electromagnéticos y resonar con las frecuencias más elevadas del Universo, proporcionando así a la alma un contacto profundo y significativo."
+      ],
+      "note": "En Caminantes del Amanecer, se enciende el Fuego Sagrado todos los días, en la forma en que el Mahavatar Babaji se lo reveló a la Madre Shaktiananda."
+    },
+    {
+      "type": "split",
+      "eyebrow": "El disipador de oscuridad",
+      "title": "Arati",
+      "image": "/img/experimentar/arati-3.webp",
+      "reverse": true,
+      "text": [
+        "Arati, una palabra sánscrita que significa “no oscuridad”, es una ceremonia diaria que establece un profundo contacto con la divinidad. Su fundamento reside en la ofrenda de amor, devoción y gratitud. La esencia del arati reside en ofrendar luz a través de una lámpara en honor al aspecto divino a consagrar, simbolizando el anhelo consciente de que todo pueda ser percibido con claridad, especialmente la vía por la cual el amor y la luz del Creador se manifiestan en estos planos."
+      ],
+      "note": "En el Ashram, se llevan a cabo los aratis tanto en la mañana como en la tarde, celebrándose en cada uno de los Templos activos."
+    },
+    {
+      "type": "split",
+      "eyebrow": "Abhishekam",
+      "title": "Rudri",
+      "image": "/img/experimentar/rudri.webp",
+      "text": [
+        "Todas las mañanas en el Ashram se realiza la activación y baño de los Shiva Lingams junto con la recitación del primer Anuvaka del Rudram.",
+        "La palabra “Rudra” se asocia con Shiva en su forma más feroz y destructora, pero también como el sanador y el benefactor. “Abhishekam” se refiere al acto de verter o rociar líquidos sagrados sobre la deidad como una forma de ofrecimiento y purificación."
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Asanas, mudras y bandhas",
+      "title": "Shakti Yoga",
+      "image": "/img/experimentar/hatha.webp",
+      "reverse": true,
+      "text": [
+        "Este sistema aborda la activación, desbloqueo y sutilización del sistema físico/etérico para un desarrollo espiritual firme y definitivo hacia el Ser.",
+        "Shakti Yoga, como práctica, incluye un conjunto de asanas (posturas), mudras (sellos) y bandhas (tensiones de activación) cuidadosamente seleccionados por la Madre Shaktiananda y el Mahavatar Babaji. Estos elementos han sido diseñados para lograr efectos óptimos, permitiendo que el cuerpo del practicante se convierta en un vehículo apto y perfecto para recibir el descenso de luz en frecuencias de activación."
+      ],
+      "note": "En el Ashram se imparten clases semanalmente y para participar no se requiere contar con experiencia previa."
+    },
+    {
+      "type": "split",
+      "eyebrow": "Movimiento y danza",
+      "title": "Shiva Tandava",
+      "image": "/img/experimentar/tandava.webp",
+      "text": [
+        "Este sistema permite la reactivación de la energía vital Shakti-Kundalini y la captación de las energías cósmicas proyectadas por las Esferas de Luz mediante dinámicas de movimiento y danza. La habilidad para manejar el cuerpo, la actitud de conexión, la visualización de las corrientes energéticas, la aplicación de mudras y la música convergen para crear una disciplina fascinante que despliega la fuerza interna.",
+        "Esta práctica permite la evocación y el descenso de poderosas corrientes de energía, las cuales están asociadas a diversos aspectos divinos que ofrecen su asistencia al danzar y evocar sus cualidades de luz."
+      ],
+      "note": "En el Ashram Caminantes del Amanecer, se ofrece instrucción en Shiva Tandava de manera semanal, brindando la oportunidad de explorar y profundizar en esta poderosa disciplina."
+    },
+    {
+      "type": "split",
+      "eyebrow": "La ciencia del prana",
+      "title": "Shiva Kriya Yoga",
+      "image": "/img/experimentar/sky.webp",
+      "reverse": true,
+      "text": [
+        "La ciencia del Shiva Kriya Yoga, es un conocimiento integral, compuesto por técnicas de control y activación de las corrientes internas de prana, que propicia la captación de fotones a nivel celular y la reactivación del ADN dormido. Contempla especialmente la transmisión del conocimiento milenario del dominio del prana o fuerza fotónica, activado a través del sonido primordial, como la llave hacia la activación de la Shakti Kundalini y la construcción o reactivación del Vehículo de Luz.",
+        "El propósito de esta ciencia es la Autorrealización, el alcance del Amor Cósmico y la Inmortalidad, aspectos que refieren al acceso del alma al Campo Unificado de Inteligencia fotónica que rige el Universo todo. El Shiva Kriya Yoga se proyecta como un sendero de Iluminación, no ofrece beneficios menores, sino que propone a cada alma el retomar su tarea primordial: alcanzar la Unidad Cósmica."
+      ],
+      "note": "En el Ashram recibirá instrucciones y técnicas para su práctica en sus niveles introductorios, los cuales le permitirán sostener una práctica libre e independiente."
+    },
+    {
+      "type": "split",
+      "eyebrow": "Dhyana",
+      "title": "Meditación",
+      "image": "/img/experimentar/dhyana.webp",
+      "text": [
+        "La meditación es la experiencia interna del alma, el contacto con aspectos que conforman al Ser. A lo largo de los tránsitos de la vida y las constantes búsquedas, el ser humano ha palpitado en el recuerdo de estados de paz y plenitud que, en algún punto de su eternidad, fueron verdaderos y reales. Sin embargo, distraído en las dinámicas del mundo, ha dejado esos momentos en rincones olvidados de su conciencia.",
+        "Las milenarias enseñanzas nos hablan de los recursos humanos para conectarnos con esta realidad que nos trasciende, con los estados de supraconciencia, la verdadera condición del ser humano, que anhelamos pero no sabemos cómo acceder a ellos."
+      ],
+      "note": "En Caminantes del Amanecer, existen innumerables espacios destinados y amorosamente preparados para alcanzar profundos estados meditativos. Contamos con salones especialmente diseñados para esta práctica, donde puedes optar por el silencio, escuchar audios con meditaciones guiadas o sonidos de frecuencias que actúan en nuestro campo vibratorio, propiciando la disolución de programas internos. Además, ofrecemos la oportunidad de meditar al aire libre, en silencio o guiado por los sonidos de la naturaleza."
+    },
+    {
+      "type": "split",
+      "eyebrow": "El servicio desinteresado",
+      "title": "Karma Yoga",
+      "image": "/img/experimentar/karma-yoga.webp",
+      "reverse": true,
+      "text": [
+        "El Karma Yoga desempeña un papel fundamental en la vida de un Ashram, representando uno de los senderos del Yoga. En el Bhagavad Gita, se le describe como la ejecución de acciones desinteresadas, sin apego a los resultados obtenidos. Este enfoque implica realizar acciones de servicio sin esperar recompensas, constituyendo así un camino hacia la liberación. En el Karma Yoga, las acciones se llevan a cabo con entrega y plena conciencia, reconociendo que todo servicio prestado es, en última instancia, una ofrenda al propio Ser.",
+        "Dentro de las actividades diarias de Caminantes del Amanecer, se fomenta la práctica opcional de esta disciplina durante 2 horas al día. Se ofrecen diversas áreas, como la huerta, carpintería, jardinería, mantenimiento e infraestructura general, donde los participantes tienen la oportunidad de desarrollar habilidades y aprender nuevas competencias. En este contexto, el Karma Yoga se convierte en una herramienta valiosa para el crecimiento personal, permitiendo a los practicantes contribuir al bienestar común sin esperar reconocimiento o beneficio personal."
+      ]
+    }
+  ]
+}

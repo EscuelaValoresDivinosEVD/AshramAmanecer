@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: `Espacios de Luz · ${site.name}`, de
 export default function Page() {
   return (
     <main>
-      <PageHero eyebrow="Geometría sagrada" title="Espacios de Luz" image="2018/11/maham5-1.jpg" lead="Templos, cuevas, jardines y salones consagrados, en armonía con el bosque andino." />
+      <PageHero eyebrow="Geometría sagrada" title="Espacios de Luz" image="/img/espacios/maham5-1.webp" lead="Templos, cuevas, jardines y salones consagrados, en armonía con el bosque andino." />
       <Statement label="Espacios sagrados" text={espaciosIntro} />
       <section className="sec-tight">
         <div className="wrap">
@@ -29,7 +29,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <Cta image="2018/11/shivakunda3.jpg" />
+      <Cta image="/img/espacios/shivakunda3.webp" />
     </main>
   );
 }

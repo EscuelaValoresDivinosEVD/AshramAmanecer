@@ -1,0 +1,53 @@
+{
+  "path": "/estadias/hospedaje/",
+  "eyebrow": "Estadía",
+  "title": "Hospedaje",
+  "hero": "/img/hospedaje/19.webp",
+  "lead": "Contamos con cinco cabañas, confortablemente equipadas, con habitaciones compartidas de dos y tres camas. Espacios separados para hombres y mujeres.",
+  "blocks": [
+    {
+      "type": "split",
+      "title": "Las cabañas",
+      "image": "/img/hospedaje/22-1.webp",
+      "text": [
+        "Contamos con cinco cabañas, confortablemente equipadas, con habitaciones compartidas de dos y tres camas. Espacios separados para hombres y mujeres.",
+        "Los baños y duchas (con agua caliente 24hs.) se encuentran fuera de las cabañas; son para compartir y también se separan entre mujeres y hombres."
+      ],
+      "note": "Es posible alojarse en habitación single abonando un costo extra, excepto en los eventos especiales anuales."
+    },
+    {
+      "type": "split",
+      "eyebrow": "Tres comidas diarias",
+      "title": "Alimentación consciente",
+      "image": "/img/hospedaje/08-2.webp",
+      "reverse": true,
+      "text": [
+        "Disponemos de dos hermosos sectores para las comidas. El comedor principal y la fonda Lakshmi, ambos con vistas a las montañas.",
+        "Se sirven 3 comidas diarias (desayuno, almuerzo y cena) siendo la alimentación estrictamente vegetariana.",
+        "Para su elaboración utilizamos, en su mayoría, vegetales de nuestra huerta orgánica, leche ordeñada del día de nuestra vaca “Ganga”, quesos y probióticos elaborados también aquí y miel de las abejas que viven en el Ashram."
+      ],
+      "note": "La alimentación está incluida en el contribución de la estadía."
+    },
+    {
+      "type": "infobox",
+      "title": "Qué tener en cuenta",
+      "items": [
+        {
+          "text": "Los baños y duchas (con agua caliente 24hs.) se encuentran fuera de las cabañas; son para compartir y también se separan entre mujeres y hombres."
+        },
+        {
+          "text": "Es posible alojarse en habitación single abonando un costo extra, excepto en los eventos especiales anuales."
+        },
+        {
+          "text": "No está permitido consumir ningún tipo de carne ni derivados y no se pueden consumir alimentos en las habitaciones ni en los espacios sagrados."
+        },
+        {
+          "text": "Si usted necesita traer consigo alimentos específicos, por alguna consideración en su salud, (sin gluten, por ejemplo) por favor notifíquenos."
+        },
+        {
+          "text": "La alimentación está incluida en el contribución de la estadía."
+        }
+      ]
+    }
+  ]
+}

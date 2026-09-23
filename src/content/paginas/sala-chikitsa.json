@@ -1,0 +1,36 @@
+{
+  "path": "/sala-chikitsa/",
+  "eyebrow": "Terapias",
+  "title": "Sala Chikitsa",
+  "hero": "/img/sala-chikitsa/header-sala-shikitsa.webp",
+  "lead": "Suspendida en medio de la vegetación natural y con una hermosa vista al valle y las montañas, este espacio brinda la posibilidad de recibir terapias fundamentadas en las antiguas sabidurías orientales, preparando el cuerpo y llevándolo a condiciones perfectas para el encuentro con el alma.",
+  "blocks": [
+    {
+      "type": "cards",
+      "eyebrow": "Terapias",
+      "title": "Sabiduría oriental para el cuerpo",
+      "items": [
+        {
+          "title": "Shirodhara",
+          "image": "/img/sala-chikitsa/shirodhara-desktop-2.webp",
+          "text": "Es el tratamiento ayurvédico por excelencia para calmar la mente y rejuvenecer todos los sentidos. Consiste en la aplicación de de aceite tibio de forma continua en la frente. Esta terapia incluye masaje de cuello y cabeza."
+        },
+        {
+          "title": "Abhyanga (Masaje Ayurvédico)",
+          "image": "/img/sala-chikitsa/masaje-ayurvedico-desktop-scaled.webp",
+          "text": "Es la unción de todo el cuerpo en aceite tibio, a través de una serie de movimientos que siguen las líneas energéticas principales de nuestro sistema. Promueve la liberación de toxinas, el rejuvenecimiento de los tejidos y reducción de estrés."
+        },
+        {
+          "title": "Desintoxicación Iónica (Pediluvio)",
+          "image": "/img/sala-chikitsa/desintoxicacion-ionica.webp",
+          "text": "Es una terapia para depurar y desintoxicar el organismo de manera no invasiva e indolora. Se aplica directamente en los pies y permite limpiar las toxinas del organismo como mucosidades, metales pesados, químicos y grasas."
+        },
+        {
+          "title": "Termomasaje (Camilla de Jade)",
+          "image": "/img/sala-chikitsa/cama-de-jade.webp",
+          "text": "Es un tratamiento que combina cinco terapias en su funcionamiento, haciendo uso de la tecnología, con algunos principios de la medicina oriental, como: masaje, acupuntura, acupresión, quiropraxia y el calor infrarrojo. Su función es aliviar el dolor muscular, depurar y relajar el organismo."
+        }
+      ]
+    }
+  ]
+}

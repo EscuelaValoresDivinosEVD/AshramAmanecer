@@ -1,3 +1,5 @@
+import mapa from "@/content/mapa.json";
+
 // Size of the base aerial photo (original of public/map/base-*.webp). Every building cutout
 // was matched pixel-exact against this image, so x/y/w/h are in its pixels.
 export const MAP_WIDTH = 5494;
@@ -18,7 +20,7 @@ export type Place = {
   h: number;
 };
 
-export const places: Place[] = [
+const geometry: Place[] = [
   { slug: "havan", name: "Havan", tagline: "Espacio del Fuego Sagrado", href: "/espacios/havan/", image: "/map/buildings/cabana-alta.webp", x: 2236, y: 674, w: 173, h: 137 },
   { slug: "tryambakeshwar-y-dhuni", name: "Tryambakeshwar y Dhuni", tagline: "Punto panorámico", href: "/espacios/tryambakeshwar-y-dhuni/", image: "/map/buildings/refugio-bosque.webp", x: 3532, y: 698, w: 110, h: 77 },
   { slug: "devi-mandir", name: "Devi Mandir", tagline: "Templo de la Madre Divina", href: "/espacios/devi-mandir/", image: "/map/buildings/domo-naranja.webp", x: 3535, y: 852, w: 442, h: 292 },
@@ -32,5 +34,12 @@ export const places: Place[] = [
   { slug: "casa-del-mirador", name: "Casa del Mirador", tagline: "Amaneceres sobre las nubes", image: "/map/buildings/casa-mirador.webp", x: 1734, y: 1979, w: 280, h: 320 },
   { slug: "yoga-shala", name: "Yoga Shala", tagline: "Salón de práctica", href: "/espacios/yoga-shala/", image: "/map/buildings/casa-techo-verde.webp", x: 2037, y: 1963, w: 590, h: 506 },
 ];
+
+// Names, short lines and links are editable in src/content/mapa.json (Pages CMS);
+// the pixel geometry above is fixed to the photo.
+export const places: Place[] = geometry.map((g) => {
+  const m = mapa.find((x) => x.slug === g.slug);
+  return m ? { ...g, name: m.name, tagline: m.tagline, href: m.href || undefined } : g;
+});
 
 export const getPlace = (slug: string) => places.find((p) => p.slug === slug);

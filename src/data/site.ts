@@ -1,17 +1,20 @@
-// Global site data: navigation, contact details, forms. Texts come from the
-// previous WordPress site (ashramcaminantesdelamanecer.com).
+import sitio from "@/content/sitio.json";
+
+// Global site data: navigation and forms. Contact details are editable in
+// src/content/sitio.json (Pages CMS).
 
 export const site = {
   name: "Ashram Caminantes del Amanecer",
   tagline: "Shiva Kriya Yoga Ashram",
-  phone: "+593 7 404 3834",
-  phoneHref: "tel:+59374043834",
-  email: "ashram@evdsky.com",
-  location: "Sustag, a 30 minutos de Cuenca · Ecuador",
-  altitude: "3.100 m s.n.m.",
+  phone: sitio.phone,
+  phoneHref: `tel:${sitio.phone.replace(/[^+\d]/g, "")}`,
+  email: sitio.email,
+  whatsapp: sitio.whatsapp,
+  location: sitio.location,
+  altitude: sitio.altitude,
   social: {
-    instagram: "https://www.instagram.com/ashramcaminantesdelamanecer/",
-    facebook: "https://www.facebook.com/ashramcaminantesdelamanecer",
+    instagram: sitio.instagram,
+    facebook: sitio.facebook,
   },
   forms: {
     contact: "https://api.leadconnectorhq.com/widget/form/I0iOIno9ELSuf1r3tSrB",

@@ -14,7 +14,7 @@ export default function Page() {
       <PageHero
         eyebrow="Actividades mensuales"
         title="Talleres y retiros"
-        image="2023/05/meditando3.jpg"
+        image="/img/home/meditando3.webp"
         lead="Además de las actividades especiales programadas mensualmente, diariamente se contemplan clases de Shakti Yoga y Tandava Kundalini, junto con la realización opcional de Karma Yoga."
       />
       <section className="sec grid-lines">

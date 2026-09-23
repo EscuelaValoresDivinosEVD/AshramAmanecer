@@ -1,0 +1,41 @@
+{
+  "ejemplos": true,
+  "eventos": [
+    {
+      "slug": "equilibrio-vital",
+      "date": "25 · 05",
+      "duration": "Full Day",
+      "title": "Equilibrio Vital",
+      "text": "Un día completo de práctica, silencio y alimentación consciente en el Ashram.",
+      "image": "/img/home/meditando3.webp",
+      "href": "/contactanos/"
+    },
+    {
+      "slug": "retiro-shiva-kriya-yoga",
+      "date": "12 · 07",
+      "duration": "5 días",
+      "title": "Retiro de Shiva Kriya Yoga",
+      "text": "Inmersión en las técnicas de Kriya junto a las actividades diarias del Ashram.",
+      "image": "/img/experimentar/sky.webp",
+      "href": "/contactanos/"
+    },
+    {
+      "slug": "taller-shiva-tandava",
+      "date": "09 · 08",
+      "duration": "Fin de semana",
+      "title": "Taller de Shiva Tandava",
+      "text": "Movimiento, danza y mudras para la reactivación de la energía Shakti-Kundalini.",
+      "image": "/img/experimentar/tandava.webp",
+      "href": "/contactanos/"
+    },
+    {
+      "slug": "fuego-sagrado",
+      "date": "21 · 09",
+      "duration": "Ceremonia",
+      "title": "Fuego Sagrado del Equinoccio",
+      "text": "Homa Vidya especial con la comunidad del Ashram y sus Iniciados.",
+      "image": "/img/experimentar/fuego-1.webp",
+      "href": "/contactanos/"
+    }
+  ]
+}

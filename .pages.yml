@@ -1,0 +1,306 @@
+# Pages CMS (https://pagescms.org) — panel para editar los textos y fotos del
+# sitio sin tocar código. Cada "Guardar" hace un commit en GitHub y Cloudflare
+# publica el sitio automáticamente en 1–2 minutos.
+
+media:
+  input: public/img
+  output: /img
+  rename: safe
+  categories: [image]
+
+components:
+  parrafos:
+    label: Párrafos
+    type: text
+    list: true
+    description: Un párrafo por casilla. Usa **texto** para negrita.
+
+content:
+  # ─────────────────────────── Inicio ───────────────────────────
+  - name: inicio
+    label: Inicio
+    type: file
+    path: src/content/inicio.json
+    format: json
+    fields:
+      - name: statement
+        label: Frase principal
+        type: object
+        fields:
+          - { name: label, label: Etiqueta, type: string }
+          - { name: text, label: Frase grande, type: text }
+          - { name: sideLabel, label: Etiqueta lateral, type: string }
+          - { name: body, label: Texto, type: text }
+          - { name: link, label: Texto del enlace, type: string }
+      - name: banner
+        label: Foto grande (Un refugio de luz)
+        type: object
+        fields:
+          - { name: figures, label: Cifras, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: text, label: Texto, type: text }
+          - { name: button, label: Botón, type: string }
+          - { name: image, label: Foto, type: image }
+      - name: kriya
+        label: Shiva Kriya Yoga
+        type: object
+        fields:
+          - { name: label, label: Etiqueta, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: lead, label: Texto en negrita, type: text }
+          - { name: text, label: Texto, type: text }
+          - { name: button, label: Botón, type: string }
+          - { name: image, label: Foto (se ve mientras carga el video), type: image }
+      - name: quote
+        label: Cita de Mataji
+        type: object
+        description: El texto de la cita se edita en «Maestros».
+        fields:
+          - { name: author, label: Firma, type: string }
+          - { name: image, label: Foto de fondo, type: image }
+      - name: rail
+        label: Carrusel de Espacios de Luz
+        type: object
+        fields:
+          - { name: title, label: Título, type: string }
+          - { name: text, label: Texto, type: text }
+      - name: practices
+        label: Paneles de prácticas
+        type: object
+        fields:
+          - { name: label, label: Etiqueta, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: link, label: Texto del enlace, type: string }
+          - name: items
+            label: Paneles
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{title}" } }
+            fields:
+              - { name: title, label: Título, type: string, required: true }
+              - { name: meta, label: Dato corto, type: string }
+              - { name: text, label: Texto, type: text }
+              - { name: image, label: Foto, type: image, required: true }
+      - name: events
+        label: Talleres y retiros (en el Inicio)
+        type: object
+        description: Los eventos se editan en «Talleres y retiros».
+        fields:
+          - { name: label, label: Etiqueta, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: link, label: Texto del enlace, type: string }
+      - name: route
+        label: Ruta Cuenca — Ashram
+        type: object
+        fields:
+          - { name: from, label: Desde, type: string }
+          - { name: to, label: Hasta, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: text, label: Texto, type: text }
+      - name: cta
+        label: Banner final (todas las páginas)
+        type: object
+        fields:
+          - { name: label, label: Etiqueta, type: string }
+          - { name: title, label: Título, type: string }
+          - { name: button, label: Botón, type: string }
+          - { name: image, label: Foto, type: image }
+
+  # ─────────────────────────── Mapa ───────────────────────────
+  - name: mapa
+    label: Mapa interactivo
+    type: file
+    path: src/content/mapa.json
+    format: json
+    list: true
+    fields:
+      - { name: slug, label: Edificio, type: string, readonly: true }
+      - { name: name, label: Nombre (aparece al pasar el mouse), type: string, required: true }
+      - { name: tagline, label: Línea corta, type: string }
+      - name: href
+        label: Página que abre
+        type: string
+        description: "Ej.: /espacios/yoga-shala/ — déjalo vacío si el edificio aún no tiene página."
+
+  # ─────────────────────────── Espacios ───────────────────────────
+  - name: espacios
+    label: Espacios de Luz
+    type: file
+    path: src/content/espacios.json
+    format: json
+    fields:
+      - { name: intro, label: Introducción, type: text }
+      - name: espacios
+        label: Espacios
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{name}" } }
+        fields:
+          - name: slug
+            label: Dirección de la página
+            type: string
+            required: true
+            pattern: { regex: "^[a-z0-9-]+$", message: "Solo minúsculas, números y guiones" }
+            description: Forma la dirección /espacios/<esto>/. No la cambies en espacios ya publicados.
+          - { name: name, label: Nombre, type: string, required: true }
+          - { name: kind, label: Tipo (línea corta), type: string }
+          - { name: text, label: Texto, type: text }
+          - name: images
+            label: Fotos (la primera es la portada)
+            type: image
+            options: { multiple: { max: 12 } }
+
+  # ─────────────────────────── Páginas ───────────────────────────
+  - name: paginas
+    label: Páginas
+    type: collection
+    path: src/content/paginas
+    format: json
+    view:
+      primary: title
+      fields: [title, path]
+    operations: { create: false, delete: false, rename: false }
+    fields:
+      - { name: path, label: Dirección, type: string, readonly: true }
+      - { name: eyebrow, label: Etiqueta de portada, type: string }
+      - { name: title, label: Título de portada, type: string, required: true }
+      - { name: lead, label: Texto de portada, type: text }
+      - { name: hero, label: Foto de portada, type: image, required: true }
+      - name: blocks
+        label: Secciones
+        type: block
+        blockKey: type
+        list: { collapsible: { collapsed: true, summary: "{title}" } }
+        blocks:
+          - name: intro
+            label: Texto
+            fields:
+              - { name: eyebrow, label: Etiqueta, type: string }
+              - { name: title, label: Título, type: string }
+              - { name: text, component: parrafos }
+          - name: split
+            label: Foto + texto
+            fields:
+              - { name: eyebrow, label: Etiqueta, type: string }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: text, component: parrafos }
+              - { name: note, label: Nota destacada, type: text }
+              - { name: image, label: Foto, type: image, required: true }
+              - { name: reverse, label: Foto a la derecha, type: boolean }
+          - name: infobox
+            label: Lista numerada (recuadro)
+            fields:
+              - { name: title, label: Título, type: string, required: true }
+              - name: items
+                label: Puntos
+                type: object
+                list: true
+                fields:
+                  - { name: title, label: Título (opcional), type: string }
+                  - { name: text, label: Texto, type: text }
+          - name: cards
+            label: Tarjetas con foto
+            fields:
+              - { name: eyebrow, label: Etiqueta, type: string }
+              - { name: title, label: Título, type: string }
+              - name: items
+                label: Tarjetas
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{title}" } }
+                fields:
+                  - { name: title, label: Título, type: string, required: true }
+                  - { name: text, label: Texto, type: text }
+                  - { name: image, label: Foto, type: image, required: true }
+          - name: faq
+            label: Preguntas frecuentes
+            fields:
+              - name: items
+                label: Preguntas
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{q}" } }
+                fields:
+                  - { name: q, label: Pregunta, type: string, required: true }
+                  - { name: a, component: parrafos, label: Respuesta }
+          - name: details
+            label: Datos útiles (aeropuertos, terminal…)
+            fields:
+              - { name: eyebrow, label: Etiqueta, type: string }
+              - { name: title, label: Título, type: string, required: true }
+              - name: groups
+                label: Grupos
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{title}" } }
+                fields:
+                  - { name: title, label: Título, type: string, required: true }
+                  - { name: lines, component: parrafos, label: Líneas }
+          - name: quote
+            label: Cita
+            fields:
+              - { name: text, label: Cita, type: text, required: true }
+              - { name: author, label: Firma, type: string }
+              - { name: image, label: Foto de fondo, type: image }
+          - name: route
+            label: Ruta
+            fields:
+              - { name: from, label: Desde, type: string }
+              - { name: to, label: Hasta, type: string }
+              - { name: title, label: Título, type: string }
+              - { name: text, label: Texto, type: text }
+
+  # ─────────────────────────── Maestros ───────────────────────────
+  - name: maestros
+    label: Maestros
+    type: file
+    path: src/content/maestros.json
+    format: json
+    fields:
+      - { name: cita, label: Cita de Mataji (Inicio y página de Mataji), type: text }
+      - name: maestros
+        label: Maestros
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{name}" } }
+        fields:
+          - { name: name, label: Nombre, type: string, required: true }
+          - { name: image, label: Foto, type: image }
+          - { name: href, label: Enlace «Saber más», type: string }
+          - { name: text, component: parrafos }
+
+  # ─────────────────────────── Eventos ───────────────────────────
+  - name: eventos
+    label: Talleres y retiros
+    type: file
+    path: src/content/eventos.json
+    format: json
+    fields:
+      - name: ejemplos
+        label: Mostrar etiqueta «Ejemplo»
+        type: boolean
+        description: Desactívalo cuando cargues los eventos reales.
+      - name: eventos
+        label: Eventos
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{date} · {title}" } }
+        fields:
+          - { name: slug, label: Identificador (sin espacios), type: string, required: true, pattern: "^[a-z0-9-]+$" }
+          - { name: date, label: Fecha (ej. 25 · 05), type: string }
+          - { name: duration, label: Duración, type: string }
+          - { name: title, label: Título, type: string, required: true }
+          - { name: text, label: Texto, type: text }
+          - { name: image, label: Foto, type: image }
+          - name: href
+            label: Enlace de «Inscríbete»
+            type: string
+            description: "Una dirección completa (https://…) o /contactanos/"
+
+  # ─────────────────────────── Contacto ───────────────────────────
+  - name: sitio
+    label: Datos de contacto
+    type: file
+    path: src/content/sitio.json
+    format: json
+    fields:
+      - { name: phone, label: Teléfono, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: whatsapp, label: WhatsApp (número con código de país), type: string }
+      - { name: location, label: Ubicación, type: string }
+      - { name: altitude, label: Altura, type: string }
+      - { name: instagram, label: Instagram (enlace), type: string }
+      - { name: facebook, label: Facebook (enlace), type: string }

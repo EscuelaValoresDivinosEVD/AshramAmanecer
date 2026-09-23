@@ -1,0 +1,61 @@
+{
+  "statement": {
+    "label": "La estación de luz de la Conciencia Babaji en América",
+    "text": "El Ashram Caminantes del Amanecer es la estación de la Conciencia Babaji en América, el centro mundial de la enseñanza de Shiva Kriya Yoga, la sabiduría de realización de Mataji Shaktiananda y el Mahavatar Babaji.",
+    "sideLabel": "Los Andes ecuatorianos",
+    "body": "Es un refugio de luz y espiritualidad profunda, situado en los Andes Ecuatorianos, destinado a la activación más plena del potencial evolutivo del ser humano consciente.",
+    "link": "Saber más"
+  },
+  "banner": {
+    "figures": "3.100 m · 50 hectáreas · Bosque andino",
+    "title": "Un refugio de luz",
+    "text": "A 30 minutos de la ciudad de Cuenca, muy cercano al parque nacional “El Cajas”. Su belleza natural, custodiada por ríos y cascadas, permite un profundo contacto con la naturaleza.",
+    "button": "Un refugio natural",
+    "image": "/img/home/ashram-general.webp"
+  },
+  "kriya": {
+    "label": "El propósito fundamental del Ashram",
+    "title": "Shiva Kriya Yoga",
+    "lead": "La práctica del milenario Shiva Kriya Yoga y sus diferentes áreas de sabiduría es el propósito fundamental del Ashram.",
+    "text": "Todo ser que desee realizar una práctica consciente en sus espacios, tendrá la oportunidad de experimentar la Ciencia Kriya en sus niveles más profundos. Se trata de un foco energético activo, que propicia la conexión cósmica de todas aquellas almas que se propongan un avance real en su sendero interno.",
+    "button": "Shiva Kriya Yoga",
+    "image": "/img/home/kriya-in-ashram.webp"
+  },
+  "quote": {
+    "author": "Mataji Shaktiananda y el Mahavatar Babaji",
+    "image": "/img/home/ma3.webp"
+  },
+  "rail": {
+    "title": "Espacios de Luz",
+    "text": "Espacios destinados a la práctica de Shiva Kriya Yoga, Hatha Yoga, meditación y contemplación, diariamente activados con los códigos milenarios de los mantras y las formas rituales védicas."
+  },
+  "practices": {
+    "label": "Diseño de activación diario",
+    "title": "Experimentar el Ashram",
+    "link": "Todas las prácticas",
+    "items": [
+      { "title": "Fuego Sagrado", "meta": "Homa Vidya · Diario", "image": "/img/experimentar/fuego-1.webp", "text": "En Caminantes del Amanecer, se enciende el Fuego Sagrado todos los días, en la forma en que el Mahavatar Babaji se lo reveló a la Madre Shaktiananda." },
+      { "title": "Arati", "meta": "Mañana y tarde", "image": "/img/experimentar/arati-3.webp", "text": "Una ceremonia diaria que establece un profundo contacto con la divinidad. Su fundamento reside en la ofrenda de amor, devoción y gratitud." },
+      { "title": "Shakti Yoga", "meta": "Semanal", "image": "/img/experimentar/hatha.webp", "text": "Activación, desbloqueo y sutilización del sistema físico/etérico para un desarrollo espiritual firme y definitivo hacia el Ser." },
+      { "title": "Shiva Tandava", "meta": "Semanal", "image": "/img/experimentar/tandava.webp", "text": "La reactivación de la energía vital Shakti-Kundalini mediante dinámicas de movimiento y danza." },
+      { "title": "Meditación", "meta": "Dhyana", "image": "/img/experimentar/dhyana.webp", "text": "Salones especialmente diseñados para alcanzar profundos estados meditativos, en silencio o guiado por los sonidos de la naturaleza." }
+    ]
+  },
+  "events": {
+    "label": "Actividades mensuales",
+    "title": "Talleres y retiros",
+    "link": "Ver calendario"
+  },
+  "route": {
+    "from": "Cuenca",
+    "to": "Ashram",
+    "title": "30 minutos",
+    "text": "Sustag, zona rural en las afueras de Cuenca, a 3.100 m s.n.m., muy cerca del Parque Nacional El Cajas."
+  },
+  "cta": {
+    "label": "Procúrate un encuentro con tu Ser",
+    "title": "Comienza tu camino",
+    "button": "Contáctanos",
+    "image": "/img/contacto/slidecontactos.webp"
+  }
+}

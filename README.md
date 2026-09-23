@@ -14,7 +14,17 @@ npm run build    # genera la carpeta estática out/
 
 Mismas URLs que el sitio anterior (WordPress), para no romper enlaces: `/quienes-somos/`, `/espacios/` (+ una página por espacio), `/experimentar-el-ashram/`, `/estadias/…`, `/refugio-natural/`, `/sala-chikitsa/`, `/amenidades/`, `/lineamientos/`, `/que-visitar/`, `/preguntas-frecuentes/`, `/mataji-shaktiananda/`, `/talleres-y-retiros/`, `/contactanos/`.
 
-## Dónde editar
+## Panel de edición (Pages CMS)
+
+Los textos, fotos, eventos, espacios y nombres del mapa se editan sin tocar código en **https://app.pagescms.org**:
+
+1. Entra con tu cuenta de GitHub e instala la app de Pages CMS en el repositorio `AshramAmanecer` (solo la primera vez).
+2. Abre el repositorio y la rama `main`.
+3. Edita y pulsa **Guardar**: se crea un commit y Cloudflare publica el sitio en 1–2 minutos.
+
+La configuración del panel está en `.pages.yml`; el contenido, en `src/content/*.json`. Las fotos nuevas se suben a `public/img/`.
+
+## Dónde editar (código)
 
 - `src/data/places.ts`: edificios del mapa (6 identificados enlazan a su espacio; 6 aún **provisionales**).
 - `src/data/site.ts`: menú, footer, contacto, redes y formularios (GoHighLevel).

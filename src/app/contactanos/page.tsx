@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: `Contáctanos · ${site.name}` };
 export default function Page() {
   return (
     <main>
-      <PageHero eyebrow="Procúrate un encuentro con tu Ser" title="Contáctanos" image="2019/01/slidecontactos.jpg" />
+      <PageHero eyebrow="Procúrate un encuentro con tu Ser" title="Contáctanos" image="/img/contacto/slidecontactos.webp" />
       <section className="sec grid-lines">
         <div className="wrap contact-grid">
           <div className="contact-info" data-reveal="stagger">

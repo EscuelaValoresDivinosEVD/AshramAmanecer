@@ -30,7 +30,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   // Smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    lenis = new Lenis({ lerp: 0.09 });
+    lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1.1 });
     lenis.on("scroll", ScrollTrigger.update);
     const raf = (t: number) => lenis?.raf(t * 1000);
     gsap.ticker.add(raf);

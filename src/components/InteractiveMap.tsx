@@ -19,10 +19,8 @@ const CLOUDS = [
   { src: 3, cx: 82, cy: 22, w: 115, flip: true, toX: 46, toY: -16, toScale: 1.3, toOpacity: 0.9 },
   { src: 4, cx: 15, cy: 80, w: 120, flip: false, toX: -48, toY: 16, toScale: 1.35, toOpacity: 0.95 },
   { src: 1, cx: 85, cy: 82, w: 120, flip: true, toX: 48, toY: 14, toScale: 1.35, toOpacity: 0.95 },
-  { src: 3, cx: 38, cy: 55, w: 95, flip: false, toX: -85, toY: 5, toScale: 1.6, toOpacity: 0 },
-  { src: 2, cx: 62, cy: 45, w: 95, flip: true, toX: 85, toY: -5, toScale: 1.6, toOpacity: 0 },
-  { src: 4, cx: 50, cy: 20, w: 90, flip: true, toX: 40, toY: -45, toScale: 1.5, toOpacity: 0 },
-  { src: 1, cx: 48, cy: 78, w: 90, flip: false, toX: -40, toY: 45, toScale: 1.5, toOpacity: 0 },
+  { src: 3, cx: 36, cy: 50, w: 90, flip: false, toX: -80, toY: 5, toScale: 1.5, toOpacity: 0 },
+  { src: 2, cx: 64, cy: 50, w: 90, flip: true, toX: 80, toY: -5, toScale: 1.5, toOpacity: 0 },
 ];
 
 /** Buildings nearer the bottom of the photo are in front: test them first. */
@@ -70,6 +68,7 @@ export default function InteractiveMap() {
   const zoom = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const openRef = useRef(false);
   const [active, setActive] = useState<string | null>(null);
   const hitTest = useAlphaMasks();
   const { navigate } = usePageTransition();
@@ -85,8 +84,13 @@ export default function InteractiveMap() {
           start: "top top",
           end: "+=220%",
           pin: true,
-          scrub: 1,
-          onUpdate: (st) => setOpen(st.progress > 0.88),
+          anticipatePin: 1,
+          scrub: 0.4,
+          onUpdate: (st) => {
+            // Only touch React state when the threshold is crossed, not every frame.
+            const next = st.progress > 0.88;
+            if (next !== openRef.current) setOpen((openRef.current = next));
+          },
         },
       });
 
@@ -100,7 +104,7 @@ export default function InteractiveMap() {
         gsap.set(el, { xPercent: -50, yPercent: -50 });
         tl.to(
           el,
-          { x: `${c.toX}vmax`, y: `${c.toY}vmax`, scale: c.toScale, opacity: c.toOpacity, duration: 0.95, ease: "power1.inOut" },
+          { x: `${c.toX}vmax`, y: `${c.toY}vmax`, scale: c.toScale, autoAlpha: c.toOpacity, duration: 0.95, ease: "power1.inOut" },
           0.05,
         );
       });
@@ -145,7 +149,7 @@ export default function InteractiveMap() {
   return (
     <section ref={section} className={`map-section${open ? " is-open" : ""}`} aria-label="Mapa interactivo del Ashram">
       <div className="map-viewport">
-        <img className="map-backdrop" src="/map/base.webp" alt="" aria-hidden />
+        <img className="map-backdrop" src="/map/base-blur.webp" alt="" aria-hidden />
         <div ref={zoom} className="map-zoom">
           <div
             ref={stage}
@@ -154,7 +158,16 @@ export default function InteractiveMap() {
             onPointerLeave={() => !leaving.current && setActive(null)}
             onClick={onClick}
           >
-            <img className="map-base" src="/map/base.webp" alt="Vista aérea del Ashram Amanecer entre las montañas" />
+            <img
+              className="map-base"
+              src="/map/base-2600.webp"
+              srcSet="/map/base-1600.webp 1600w, /map/base-2600.webp 2600w, /map/base-3600.webp 3600w"
+              sizes="max(100vw, 178svh)"
+              alt="Vista aérea del Ashram Amanecer entre las montañas"
+              fetchPriority="high"
+              decoding="async"
+              draggable={false}
+            />
             <div className="map-dim" />
             {places.map((p) => (
               <button
@@ -173,7 +186,7 @@ export default function InteractiveMap() {
                 }}
               >
                 <span className="bld-glow" />
-                <img src={p.image} alt="" draggable={false} />
+                <img src={p.image} alt="" draggable={false} decoding="async" />
               </button>
             ))}
             {activePlace && (
@@ -200,7 +213,8 @@ export default function InteractiveMap() {
               <img
                 src={`/map/clouds/cloud-${c.src}.webp`}
                 alt=""
-                style={{ transform: c.flip ? "scaleX(-1)" : undefined, animationDelay: `${-i * 1.7}s` }}
+                decoding="async"
+                style={c.flip ? { transform: "scaleX(-1)" } : undefined}
               />
             </div>
           ))}

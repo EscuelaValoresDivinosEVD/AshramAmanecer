@@ -1,4 +1,4 @@
-// Size of the base aerial photo (public/map/base.webp). Every building cutout
+// Size of the base aerial photo (original of public/map/base-*.webp). Every building cutout
 // was matched pixel-exact against this image, so x/y/w/h are in its pixels.
 export const MAP_WIDTH = 5494;
 export const MAP_HEIGHT = 3090;

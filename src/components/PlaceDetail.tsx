@@ -28,7 +28,7 @@ export default function PlaceDetail({ place }: { place: Place }) {
   return (
     <main ref={root} className="detail">
       <div className="detail-bg" aria-hidden>
-        <img src="/map/base.webp" alt="" style={{ objectPosition: focus, transformOrigin: focus }} />
+        <img src="/map/base-1600.webp" alt="" style={{ objectPosition: focus, transformOrigin: focus }} />
       </div>
       <div className="detail-inner">
         <figure className="detail-figure">

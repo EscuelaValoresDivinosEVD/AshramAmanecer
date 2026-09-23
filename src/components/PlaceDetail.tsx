@@ -36,7 +36,7 @@ export default function PlaceDetail({ place }: { place: Place }) {
           <img src={place.image} alt={place.name} />
         </figure>
         <div className="detail-copy">
-          <p className="eyebrow">Ashram Amanecer</p>
+          <img className="detail-brand" src="/brand/icono-arena.svg" alt="Ashram Caminantes del Amanecer" />
           <h1>{place.name}</h1>
           <p className="detail-tagline">{place.tagline}</p>
           <p>

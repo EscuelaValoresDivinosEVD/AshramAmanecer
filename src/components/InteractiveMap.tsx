@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { MAP_HEIGHT, MAP_WIDTH, places, type Place } from "@/data/places";
-import { MAP_REVEAL_ID, usePageTransition } from "./Providers";
+import { MAP_REVEAL_ID, getLenis, usePageTransition } from "./Providers";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -84,7 +84,6 @@ export default function InteractiveMap() {
           start: "top top",
           end: "+=220%",
           pin: true,
-          anticipatePin: 1,
           scrub: 0.4,
           onUpdate: (st) => {
             // Only touch React state when the threshold is crossed, not every frame.
@@ -94,7 +93,9 @@ export default function InteractiveMap() {
         },
       });
 
-      tl.to(".map-intro", { autoAlpha: 0, y: -60, duration: 0.25 }, 0)
+      tl.to(".intro-icon", { y: -140, duration: 0.3 }, 0)
+        .to(".intro-letters", { y: -70, duration: 0.3 }, 0)
+        .to(".map-intro", { autoAlpha: 0, duration: 0.24 }, 0.02)
         .to(".map-fog", { autoAlpha: 0, duration: 0.7 }, 0)
         .fromTo(zoom.current, { scale: 1.3 }, { scale: 1, duration: 1, ease: "power1.out" }, 0)
         .fromTo(".map-hint", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.12 }, 0.88);
@@ -111,6 +112,15 @@ export default function InteractiveMap() {
     },
     { scope: section },
   );
+
+  // "Descubrir": glide down to the end of the reveal so the map is explorable.
+  const discover = () => {
+    const st = ScrollTrigger.getById(MAP_REVEAL_ID);
+    if (!st) return;
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(st.end, { duration: 3, easing: (t) => 1 - Math.pow(1 - t, 3) });
+    else window.scrollTo({ top: st.end, behavior: "smooth" });
+  };
 
   const pointToImage = (clientX: number, clientY: number) => {
     const r = stage.current!.getBoundingClientRect();
@@ -163,7 +173,7 @@ export default function InteractiveMap() {
               src="/map/base-2600.webp"
               srcSet="/map/base-1600.webp 1600w, /map/base-2600.webp 2600w, /map/base-3600.webp 3600w"
               sizes="max(100vw, 178svh)"
-              alt="Vista aérea del Ashram Amanecer entre las montañas"
+              alt="Vista aérea del Ashram Caminantes del Amanecer entre las montañas"
               fetchPriority="high"
               decoding="async"
               draggable={false}
@@ -221,11 +231,15 @@ export default function InteractiveMap() {
         </div>
 
         <div className="map-intro">
-          <p className="eyebrow">Un refugio entre las montañas</p>
-          <h1>Ashram Amanecer</h1>
-          <p className="scroll-cue">
-            Desliza para descubrir <span aria-hidden>↓</span>
-          </p>
+          <div className="intro-icon">
+            <img src="/brand/icono.svg" alt="" />
+          </div>
+          <h1 className="intro-letters">
+            <img src="/brand/letras-arco.svg" alt="Ashram Caminantes del Amanecer" />
+          </h1>
+          <button type="button" className="discover-btn" onClick={discover}>
+            Descubrir <span aria-hidden>↓</span>
+          </button>
         </div>
         <p className="map-hint">Pasa el cursor sobre cada lugar para conocerlo</p>
       </div>

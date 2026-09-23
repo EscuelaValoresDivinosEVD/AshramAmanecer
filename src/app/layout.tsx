@@ -7,11 +7,11 @@ const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "500", "6
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Ashram Amanecer",
-  description: "Un refugio entre las montañas.",
+  title: "Ashram Caminantes del Amanecer",
+  description: "Shiva Kriya Yoga Ashram, un refugio entre las montañas.",
 };
 
-export const viewport: Viewport = { themeColor: "#1c2a1a" };
+export const viewport: Viewport = { themeColor: "#1f343e" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

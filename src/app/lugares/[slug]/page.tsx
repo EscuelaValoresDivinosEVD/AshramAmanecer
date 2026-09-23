@@ -10,7 +10,7 @@ export const generateStaticParams = () => places.map((p) => ({ slug: p.slug }));
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const place = getPlace((await params).slug);
-  return { title: place ? `${place.name} · Ashram Amanecer` : "Ashram Amanecer" };
+  return { title: place ? `${place.name} · Ashram Caminantes del Amanecer` : "Ashram Caminantes del Amanecer" };
 }
 
 export default async function PlacePage({ params }: Props) {

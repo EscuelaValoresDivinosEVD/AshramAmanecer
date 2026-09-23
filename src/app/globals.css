@@ -83,11 +83,7 @@ html.lenis body {
   /* Only needed on tall portrait screens; skip the layer elsewhere. */
   display: none;
 }
-@media (max-aspect-ratio: 3 / 4) {
-  .map-backdrop {
-    display: block;
-  }
-}
+
 
 .map-zoom {
   position: absolute;
@@ -106,10 +102,11 @@ html.lenis body {
   translate: -50% -50%;
   pointer-events: none;
 }
+/* Tall screens: the photo covers the full height (no visible edges) and is
+   dragged sideways to explore; vertical swipes still scroll the page. */
 @media (max-aspect-ratio: 3 / 4) {
-  /* Portrait: fit the built area (≈41% of the photo's width) to the screen. */
   .map-stage {
-    width: 225vw;
+    touch-action: pan-y;
   }
 }
 .is-open .map-stage {
@@ -349,7 +346,7 @@ html.lenis body {
     font-size: 0;
   }
   .map-hint::before {
-    content: "Toca un lugar para conocerlo";
+    content: "Desliza a los lados · toca un lugar";
     font-size: 0.78rem;
   }
 }
@@ -467,10 +464,14 @@ html.lenis body {
   filter: blur(30px);
   animation: glow-breathe 3.2s ease-in-out infinite;
 }
+.detail-copy {
+  min-width: 0;
+}
 .detail-copy h1 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2rem, 6vw, 5rem);
+  overflow-wrap: break-word;
   font-weight: 400;
   line-height: 1;
 }

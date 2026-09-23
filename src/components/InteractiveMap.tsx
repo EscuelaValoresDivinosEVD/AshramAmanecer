@@ -73,6 +73,36 @@ export default function InteractiveMap() {
   const hitTest = useAlphaMasks();
   const { navigate } = usePageTransition();
   const leaving = useRef(false);
+  const pan = useRef({ x: 0, min: 0, max: 0, startX: 0, startPan: 0, dragging: false, moved: false });
+
+  // On tall screens the photo covers the full height, so it is wider than the
+  // viewport: it can be dragged sideways. Start centred on the built area.
+  useEffect(() => {
+    const layout = () => {
+      const el = stage.current;
+      if (!el) return;
+      const w = el.offsetWidth;
+      const vw = window.innerWidth;
+      const edge = Math.max(0, (w - vw) / 2); // never show the photo's edges
+      // Keep the view on the built area (buildings span x 1734–3977) plus a margin.
+      const k = w / MAP_WIDTH;
+      const left = (1734 - 280) * k;
+      const right = (3977 + 280) * k;
+      const p = pan.current;
+      p.min = Math.max(-edge, Math.min(0, w / 2 - (right - vw / 2)));
+      p.max = Math.min(edge, Math.max(0, w / 2 - (left + vw / 2)));
+      setPan(-(((1734 + 3977) / 2) * k - w / 2));
+    };
+    layout();
+    window.addEventListener("resize", layout);
+    return () => window.removeEventListener("resize", layout);
+  }, []);
+
+  const setPan = (x: number) => {
+    const p = pan.current;
+    p.x = Math.max(p.min, Math.min(p.max, x));
+    if (stage.current) stage.current.style.transform = `translate3d(${p.x}px, 0, 0)`;
+  };
 
   useGSAP(
     () => {
@@ -139,13 +169,37 @@ export default function InteractiveMap() {
     navigate(p.href ?? `/lugares/${p.slug}/`);
   };
 
+  const onPointerDown = (e: React.PointerEvent) => {
+    const p = pan.current;
+    p.moved = false; // every new touch starts as a tap until it travels
+    if (!open || e.pointerType === "mouse" || p.max === p.min) return;
+    Object.assign(p, { startX: e.clientX, startPan: p.x, dragging: true });
+  };
+
   const onPointerMove = (e: React.PointerEvent) => {
-    if (!open || leaving.current || e.pointerType === "touch") return;
+    if (!open || leaving.current) return;
+    const p = pan.current;
+    if (e.pointerType !== "mouse") {
+      if (!p.dragging) return;
+      const dx = e.clientX - p.startX;
+      if (Math.abs(dx) > 6) p.moved = true;
+      if (p.moved) setPan(p.startPan + dx);
+      return;
+    }
     setActive(pointToImage(e.clientX, e.clientY)?.slug ?? null);
+  };
+
+  const onPointerUp = () => {
+    pan.current.dragging = false;
   };
 
   const onClick = (e: React.MouseEvent) => {
     if (!open || leaving.current || e.detail === 0) return;
+    // A sideways drag ends with a click event: it is not a tap on a building.
+    if (pan.current.moved) {
+      pan.current.moved = false;
+      return;
+    }
     const hit = pointToImage(e.clientX, e.clientY);
     if (!hit) return setActive(null);
     // Touch has no hover: first tap shows the name, second tap enters.
@@ -164,8 +218,11 @@ export default function InteractiveMap() {
           <div
             ref={stage}
             className={`map-stage${activePlace ? " has-active" : ""}`}
+            onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
-            onPointerLeave={() => !leaving.current && setActive(null)}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+            onPointerLeave={(e) => e.pointerType === "mouse" && !leaving.current && setActive(null)}
             onClick={onClick}
           >
             <img

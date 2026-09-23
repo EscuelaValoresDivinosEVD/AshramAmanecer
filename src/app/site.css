@@ -1474,7 +1474,8 @@ a.card:hover .card-media img {
   margin: clamp(3rem, 6vw, 5rem) 0 0;
   padding-inline: var(--gutter);
   font-family: var(--cond);
-  font-size: clamp(2.6rem, 8.9vw, 9.6rem);
+  /* Scales with the screen so the full name always fits on one line. */
+  font-size: min(9.6rem, calc((100vw - 2 * var(--gutter)) / 11.2));
   line-height: 0.85;
   text-transform: uppercase;
   text-align: center;
@@ -1511,6 +1512,12 @@ a.card:hover .card-media img {
 @media (max-width: 600px) {
   .ftr-cols {
     grid-template-columns: 1fr 1fr;
+  }
+  .ftr-tiles {
+    grid-template-columns: 1fr;
+  }
+  .tile {
+    min-height: 110px;
   }
 }
 

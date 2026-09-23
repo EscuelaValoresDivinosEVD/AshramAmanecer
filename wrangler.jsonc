@@ -1,0 +1,12 @@
+// Cloudflare Workers (static assets). If the project is on Cloudflare Pages
+// instead, this file is ignored: set build command `npm run build` and
+// output directory `out` in the Pages dashboard.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ashramamanecer",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}

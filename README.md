@@ -22,7 +22,10 @@ Los textos, fotos, eventos, espacios y nombres del mapa se editan sin tocar cód
 2. Abre el repositorio y la rama `main`.
 3. Edita y pulsa **Guardar**: se crea un commit y Cloudflare publica el sitio en 1–2 minutos.
 
-**Galería de imágenes:** `/admin/imagenes/` muestra todas las imágenes del sitio, dónde aparece cada una y un enlace que abre esa sección en el panel para reemplazarla (página oculta a buscadores).
+**Galería de imágenes:** `/admin/imagenes/` muestra todas las imágenes del sitio y dónde aparece cada una. Con la contraseña de administración se puede **subir una foto o pegar una dirección** en cada lugar: el Worker (`worker/index.ts`) hace el commit en GitHub y Cloudflare publica en 1–2 minutos. Requiere dos secretos en Cloudflare (Worker → Settings → Variables and Secrets):
+
+- `ADMIN_PASSWORD`: la contraseña de la página.
+- `GITHUB_TOKEN`: token *fine-grained* de GitHub con permiso **Contents: Read and write** solo sobre este repositorio.
 
 La configuración del panel está en `.pages.yml`; el contenido, en `src/content/*.json`. Las fotos nuevas se suben a `public/img/`.
 

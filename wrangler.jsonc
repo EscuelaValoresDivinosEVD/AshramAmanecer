@@ -1,12 +1,18 @@
-// Cloudflare Workers (static assets). If the project is on Cloudflare Pages
-// instead, this file is ignored: set build command `npm run build` and
-// output directory `out` in the Pages dashboard.
+// Cloudflare Workers: static site from ./out plus the admin API in worker/.
+// Secrets ADMIN_PASSWORD and GITHUB_TOKEN are set in the Cloudflare dashboard.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ashramamanecer",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./out",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "GITHUB_REPO": "EscuelaValoresDivinosEVD/AshramAmanecer",
+    "GITHUB_BRANCH": "main"
   }
 }

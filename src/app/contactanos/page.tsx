@@ -3,13 +3,14 @@ import { PageHero } from "@/components/site/Blocks";
 import FormEmbed from "@/components/site/FormEmbed";
 import TLink from "@/components/site/TLink";
 import { site } from "@/data/site";
+import fotos from "@/content/portadas.json";
 
 export const metadata: Metadata = { title: `Contáctanos · ${site.name}` };
 
 export default function Page() {
   return (
     <main>
-      <PageHero eyebrow="Procúrate un encuentro con tu Ser" title="Contáctanos" image="/img/contacto/slidecontactos.webp" />
+      <PageHero eyebrow="Procúrate un encuentro con tu Ser" title="Contáctanos" image={fotos.contacto.hero} />
       <section className="sec grid-lines">
         <div className="wrap contact-grid">
           <div className="contact-info" data-reveal="stagger">

@@ -1530,3 +1530,157 @@ a.card:hover .card-media img {
     opacity: 1;
   }
 }
+
+/* ─── Admin: image gallery (/admin/imagenes/) ─── */
+.admin {
+  padding: 110px 0 6rem;
+  min-height: 100svh;
+}
+.admin h1 {
+  margin: 0.3rem 0 1rem;
+}
+.admin-lead {
+  max-width: 46rem;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+.ig-tools {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  gap: 10px;
+  padding: 12px 0;
+  background: rgb(var(--crema));
+}
+.ig-tools input {
+  width: 100%;
+  max-width: 34rem;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+}
+.ig-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ig-chips button {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: 500 0.8rem/1 var(--body);
+  cursor: pointer;
+}
+.ig-chips button.is-on {
+  background: rgb(var(--noche));
+  border-color: rgb(var(--noche));
+  color: rgb(var(--crema));
+}
+.ig-count {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.ig-grid {
+  columns: 4 280px;
+  column-gap: 14px;
+}
+.ig-card {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.ig-thumb {
+  position: relative;
+  display: block;
+  background: rgb(var(--crema-2));
+}
+.ig-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+}
+.ig-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgb(var(--noche));
+  color: rgb(var(--arena));
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+.ig-body {
+  padding: 10px 12px 12px;
+}
+.ig-path {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(var(--crema));
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ig-path code {
+  font-size: 0.74rem;
+  word-break: break-all;
+}
+.ig-path span {
+  flex: none;
+  font-size: 0.72rem;
+  color: rgb(var(--terracota));
+}
+.ig-meta {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+.ig-uses {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.ig-uses li {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.ig-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+}
+.ig-links a {
+  color: rgb(var(--noche) / 0.65);
+}
+.ig-links .ig-edit {
+  color: rgb(var(--terracota));
+  font-weight: 600;
+}
+.ig-unused {
+  margin-top: 3rem;
+}
+.ig-unused .ig-grid {
+  margin-top: 1.5rem;
+}

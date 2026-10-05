@@ -5,6 +5,7 @@ import Pic from "@/components/site/Pic";
 import TLink from "@/components/site/TLink";
 import { maestros, matajiQuote } from "@/data/maestros";
 import { site } from "@/data/site";
+import fotos from "@/content/portadas.json";
 
 export const metadata: Metadata = { title: `Mataji Shaktiananda · ${site.name}` };
 
@@ -12,7 +13,7 @@ export default function Page() {
   const mataji = maestros[0];
   return (
     <main>
-      <PageHero eyebrow="Shaktiananda Ma en Caminantes del Amanecer" title="Mataji Shaktiananda" image="/img/mataji/016.webp" />
+      <PageHero eyebrow="Shaktiananda Ma en Caminantes del Amanecer" title="Mataji Shaktiananda" image={fotos.mataji.hero} />
       <section className="sec grid-lines">
         <div className="wrap feature">
           <div className="feature-copy" data-reveal="stagger">
@@ -28,11 +29,11 @@ export default function Page() {
             </TLink>
           </div>
           <div className="feature-media frame" data-clip>
-            <Pic src="/img/mataji/09.webp" sizes="(max-width: 860px) 100vw, 50vw" alt="Mataji Shaktiananda en ceremonia" />
+            <Pic src={fotos.mataji.foto} sizes="(max-width: 860px) 100vw, 50vw" alt="Mataji Shaktiananda en ceremonia" />
           </div>
         </div>
       </section>
-      <Quote text={matajiQuote} image="/img/home/ma-lingam.webp" />
+      <Quote text={matajiQuote} image={fotos.mataji.cita} />
       <Cta />
     </main>
   );

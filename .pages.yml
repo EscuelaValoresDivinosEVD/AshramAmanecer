@@ -290,6 +290,42 @@ content:
             type: string
             description: "Una dirección completa (https://…) o /contactanos/"
 
+  # ─────────────────────────── Fotos de otras páginas ───────────────────────────
+  - name: portadas
+    label: Fotos de otras páginas
+    type: file
+    path: src/content/portadas.json
+    format: json
+    fields:
+      - name: espacios
+        label: Espacios de Luz (listado)
+        type: object
+        fields:
+          - { name: hero, label: Foto de portada, type: image }
+          - { name: cta, label: Foto del banner final, type: image }
+      - name: estadia
+        label: Estadía (índice)
+        type: object
+        fields:
+          - { name: hero, label: Foto de portada, type: image }
+      - name: mataji
+        label: Mataji Shaktiananda
+        type: object
+        fields:
+          - { name: hero, label: Foto de portada, type: image }
+          - { name: foto, label: Foto junto al texto, type: image }
+          - { name: cita, label: Foto de fondo de la cita, type: image }
+      - name: talleres
+        label: Talleres y retiros
+        type: object
+        fields:
+          - { name: hero, label: Foto de portada, type: image }
+      - name: contacto
+        label: Contáctanos
+        type: object
+        fields:
+          - { name: hero, label: Foto de portada, type: image }
+
   # ─────────────────────────── Contacto ───────────────────────────
   - name: sitio
     label: Datos de contacto

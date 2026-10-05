@@ -22,6 +22,8 @@ Los textos, fotos, eventos, espacios y nombres del mapa se editan sin tocar cód
 2. Abre el repositorio y la rama `main`.
 3. Edita y pulsa **Guardar**: se crea un commit y Cloudflare publica el sitio en 1–2 minutos.
 
+**Galería de imágenes:** `/admin/imagenes/` muestra todas las imágenes del sitio, dónde aparece cada una y un enlace que abre esa sección en el panel para reemplazarla (página oculta a buscadores).
+
 La configuración del panel está en `.pages.yml`; el contenido, en `src/content/*.json`. Las fotos nuevas se suben a `public/img/`.
 
 ## Dónde editar (código)

@@ -1,0 +1,20 @@
+{
+  "espacios": {
+    "hero": "/img/espacios/maham5-1.webp",
+    "cta": "/img/espacios/shivakunda3.webp"
+  },
+  "estadia": {
+    "hero": "/img/hospedaje/22-1.webp"
+  },
+  "mataji": {
+    "hero": "/img/mataji/016.webp",
+    "foto": "/img/mataji/09.webp",
+    "cita": "/img/home/ma-lingam.webp"
+  },
+  "talleres": {
+    "hero": "/img/home/meditando3.webp"
+  },
+  "contacto": {
+    "hero": "/img/contacto/slidecontactos.webp"
+  }
+}

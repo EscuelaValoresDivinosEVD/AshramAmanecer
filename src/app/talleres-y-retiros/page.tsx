@@ -5,6 +5,7 @@ import EventList from "@/components/site/EventList";
 import Panels from "@/components/site/Panels";
 import { eventos } from "@/data/eventos";
 import { site } from "@/data/site";
+import fotos from "@/content/portadas.json";
 
 export const metadata: Metadata = { title: `Talleres y retiros · ${site.name}` };
 
@@ -14,7 +15,7 @@ export default function Page() {
       <PageHero
         eyebrow="Actividades mensuales"
         title="Talleres y retiros"
-        image="/img/home/meditando3.webp"
+        image={fotos.talleres.hero}
         lead="Además de las actividades especiales programadas mensualmente, diariamente se contemplan clases de Shakti Yoga y Tandava Kundalini, junto con la realización opcional de Karma Yoga."
       />
       <section className="sec grid-lines">

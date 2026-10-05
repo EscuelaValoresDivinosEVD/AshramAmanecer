@@ -5,13 +5,14 @@ import Pic from "@/components/site/Pic";
 import TLink from "@/components/site/TLink";
 import { espacios, espaciosIntro } from "@/data/espacios";
 import { site } from "@/data/site";
+import fotos from "@/content/portadas.json";
 
 export const metadata: Metadata = { title: `Espacios de Luz · ${site.name}`, description: espaciosIntro.slice(0, 160) };
 
 export default function Page() {
   return (
     <main>
-      <PageHero eyebrow="Geometría sagrada" title="Espacios de Luz" image="/img/espacios/maham5-1.webp" lead="Templos, cuevas, jardines y salones consagrados, en armonía con el bosque andino." />
+      <PageHero eyebrow="Geometría sagrada" title="Espacios de Luz" image={fotos.espacios.hero} lead="Templos, cuevas, jardines y salones consagrados, en armonía con el bosque andino." />
       <Statement label="Espacios sagrados" text={espaciosIntro} />
       <section className="sec-tight">
         <div className="wrap">
@@ -29,7 +30,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <Cta image="/img/espacios/shivakunda3.webp" />
+      <Cta image={fotos.espacios.cta} />
     </main>
   );
 }

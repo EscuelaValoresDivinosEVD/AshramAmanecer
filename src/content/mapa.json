@@ -1,9 +1,9 @@
 [
   {
     "slug": "havan",
-    "name": "Havan",
-    "tagline": "Espacio del Fuego Sagrado",
-    "href": "/espacios/havan/"
+    "name": "Yagna Shala",
+    "tagline": "",
+    "href": ""
   },
   {
     "slug": "tryambakeshwar-y-dhuni",
@@ -19,8 +19,8 @@
   },
   {
     "slug": "casa-blanca",
-    "name": "Casa Blanca",
-    "tagline": "Hospedaje con vista a la montaña",
+    "name": "Casa Swamis",
+    "tagline": "",
     "href": ""
   },
   {
@@ -31,15 +31,15 @@
   },
   {
     "slug": "comedor",
-    "name": "Comedor e Invernadero",
-    "tagline": "Alimento consciente, cultivado aquí",
+    "name": "Fonda Lakshmi",
+    "tagline": "Tienda y comedor",
     "href": ""
   },
   {
     "slug": "piramide",
-    "name": "Pirámide",
-    "tagline": "Silencio y contemplación",
-    "href": ""
+    "name": "Havan",
+    "tagline": "Espacio del Fuego Sagrado",
+    "href": "/espacios/havan/"
   },
   {
     "slug": "shiva-kunda",
@@ -49,9 +49,9 @@
   },
   {
     "slug": "cabana-del-jardin",
-    "name": "Cabaña del Jardín",
-    "tagline": "Entre flores y senderos",
-    "href": ""
+    "name": "Salón de los Maestros",
+    "tagline": "Amrita Shala",
+    "href": "/espacios/amrita-shala/"
   },
   {
     "slug": "maha-mrityunjaya-mandir",
@@ -61,8 +61,8 @@
   },
   {
     "slug": "casa-del-mirador",
-    "name": "Casa del Mirador",
-    "tagline": "Amaneceres sobre las nubes",
+    "name": "Cabaña Shani",
+    "tagline": "",
     "href": ""
   },
   {

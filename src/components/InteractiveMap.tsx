@@ -263,7 +263,7 @@ export default function InteractiveMap() {
                 style={{ left: pct(activePlace.x + activePlace.w / 2, MAP_WIDTH), top: pct(activePlace.y, MAP_HEIGHT) }}
               >
                 <strong>{activePlace.name}</strong>
-                <span>{activePlace.tagline}</span>
+                {activePlace.tagline && <span>{activePlace.tagline}</span>}
               </div>
             )}
           </div>

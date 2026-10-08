@@ -9,7 +9,9 @@
   "mataji": {
     "hero": "/img/mataji/016.webp",
     "foto": "/img/mataji/09.webp",
-    "cita": "/img/home/ma-lingam.webp"
+    "cita": "/img/home/ma-lingam.webp",
+    "video": "/video/mataji.mp4",
+    "videoPoster": "/video/mataji.webp"
   },
   "talleres": {
     "hero": "/img/home/meditando3.webp"

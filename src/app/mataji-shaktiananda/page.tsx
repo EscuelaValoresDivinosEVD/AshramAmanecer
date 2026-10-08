@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Quote } from "@/components/site/Blocks";
+import { PageHero, Quote, VideoSection } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
 import Pic from "@/components/site/Pic";
 import TLink from "@/components/site/TLink";
@@ -33,6 +33,7 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <VideoSection eyebrow="Video" title="Mataji Shaktiananda" src={fotos.mataji.video} poster={fotos.mataji.videoPoster} />
       <Quote text={matajiQuote} image={fotos.mataji.cita} />
       <Cta />
     </main>

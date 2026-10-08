@@ -20,7 +20,8 @@ export type Block =
   | { type: "faq"; items: { q: string; a: string[] }[] }
   | { type: "quote"; text: string; author?: string; image?: string }
   | { type: "details"; eyebrow?: string; title: string; groups: { title: string; lines: string[] }[] }
-  | { type: "route"; from: string; to: string; title: string; text: string };
+  | { type: "route"; from: string; to: string; title: string; text: string }
+  | { type: "video"; eyebrow?: string; title?: string; text?: string; src: string; poster?: string };
 
 export type Page = {
   path: string;

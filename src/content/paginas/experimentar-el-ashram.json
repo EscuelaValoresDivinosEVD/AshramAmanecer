@@ -13,6 +13,13 @@
       ]
     },
     {
+      "type": "video",
+      "eyebrow": "Un día en el Ashram",
+      "title": "Experimentar el Ashram",
+      "src": "/video/experimentar.mp4",
+      "poster": "/video/experimentar.webp"
+    },
+    {
       "type": "split",
       "eyebrow": "Homa Vidya",
       "title": "Fuego Sagrado",

@@ -254,6 +254,25 @@ export function Quote({ text, author, image }: { text: string; author?: string; 
   );
 }
 
+/** Video with controls (files in public/video/), on a dark band. */
+export function VideoSection({ eyebrow, title, text, src, poster }: { eyebrow?: string; title?: string; text?: string; src: string; poster?: string }) {
+  return (
+    <section className="sec on-dark grid-lines">
+      <div className="wrap">
+        {(eyebrow || title) && <SecHead eyebrow={eyebrow} title={title} />}
+        {text && (
+          <div className="prose" style={{ marginBottom: "2rem" }} data-reveal>
+            <p>{text}</p>
+          </div>
+        )}
+        <div className="video-box" data-reveal>
+          <video src={src} poster={poster} controls preload="none" playsInline />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Blocks({ blocks }: { blocks: Block[] }) {
   return (
     <>
@@ -275,6 +294,8 @@ export default function Blocks({ blocks }: { blocks: Block[] }) {
             return <Route key={i} {...b} />;
           case "quote":
             return <Quote key={i} {...b} />;
+          case "video":
+            return <VideoSection key={i} {...b} />;
         }
       })}
     </>

@@ -5,6 +5,7 @@ import Providers from "@/components/Providers";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import Motion from "@/components/site/Motion";
+import Analytics from "@/components/site/Analytics";
 import "./globals.css";
 import "./site.css";
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Footer />
           <Motion />
+          <Analytics />
         </Providers>
       </body>
     </html>

@@ -237,6 +237,14 @@ content:
               - { name: text, label: Cita, type: text, required: true }
               - { name: author, label: Firma, type: string }
               - { name: image, label: Foto de fondo, type: image }
+          - name: video
+            label: Video
+            fields:
+              - { name: eyebrow, label: Etiqueta, type: string }
+              - { name: title, label: Título, type: string }
+              - { name: text, label: Texto, type: text }
+              - { name: src, label: Archivo de video, type: string, required: true, description: "Ej.: /video/experimentar.mp4 (archivos en public/video/, máx. 25 MB)" }
+              - { name: poster, label: Imagen antes de reproducir, type: string, description: "Ej.: /video/experimentar.webp" }
           - name: route
             label: Ruta
             fields:
@@ -315,6 +323,8 @@ content:
           - { name: hero, label: Foto de portada, type: image }
           - { name: foto, label: Foto junto al texto, type: image }
           - { name: cita, label: Foto de fondo de la cita, type: image }
+          - { name: video, label: Video (archivo), type: string, description: "Ej.: /video/mataji.mp4" }
+          - { name: videoPoster, label: Imagen antes de reproducir el video, type: string }
       - name: talleres
         label: Talleres y retiros
         type: object

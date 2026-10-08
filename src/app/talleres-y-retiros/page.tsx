@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { PageHero, SecHead } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
@@ -8,7 +9,7 @@ import { eventos, mostrarTalleres } from "@/data/eventos";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
-export const metadata: Metadata = { title: `Talleres y retiros · ${site.name}` };
+export const metadata: Metadata = seo({ title: "Talleres y retiros", description: "Talleres y retiros espirituales mensuales en el Ashram, con clases diarias de Shakti Yoga y Tandava Kundalini, cerca de Cuenca, Ecuador.", path: "/talleres-y-retiros/" });
 
 export default function Page() {
   // Switched off in src/content/eventos.json («mostrar»): no page is published.

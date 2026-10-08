@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { PageHero, Statement } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
@@ -7,7 +8,7 @@ import { espacios, espaciosIntro } from "@/data/espacios";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
-export const metadata: Metadata = { title: `Espacios de Luz · ${site.name}`, description: espaciosIntro.slice(0, 160) };
+export const metadata: Metadata = seo({ title: "Espacios de Luz", description: espaciosIntro, path: "/espacios/" });
 
 export default function Page() {
   return (

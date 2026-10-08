@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPage, pages } from "@/data/pages";
@@ -10,7 +11,7 @@ import TLink from "./TLink";
 
 export function pageMetadata(path: string): Metadata {
   const p = getPage(path);
-  return p ? { title: `${p.title} · ${site.name}`, description: p.lead ? plain(p.lead).slice(0, 160) : undefined } : {};
+  return p ? seo({ title: p.title, description: p.lead || p.blocks.map((b) => ("text" in b && Array.isArray(b.text) ? b.text.join(" ") : "")).join(" "), path }) : {};
 }
 
 /** Next pages to explore: the other stay/experience pages. */

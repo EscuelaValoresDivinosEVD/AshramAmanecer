@@ -1,3 +1,5 @@
+import { site } from "@/data/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, seo } from "@/lib/seo";
 import type { Metadata, Viewport } from "next";
 import { Inter_Tight, Oswald, Spectral } from "next/font/google";
 import localFont from "next/font/local";
@@ -15,19 +17,25 @@ const display = localFont({ src: "../fonts/mc-merchant.woff2", variable: "--font
 const cond = Oswald({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-cond" });
 
 export const metadata: Metadata = {
-  title: "Ashram Caminantes del Amanecer",
-  description: "Shiva Kriya Yoga Ashram, un refugio de luz y espiritualidad profunda en los Andes ecuatorianos.",
-  metadataBase: new URL("https://ashramcaminantesdelamanecer.com"),
-  openGraph: {
-    title: "Ashram Caminantes del Amanecer",
-    description: "Shiva Kriya Yoga Ashram, un refugio de luz y espiritualidad profunda en los Andes ecuatorianos.",
-    url: "/",
-    siteName: "Ashram Caminantes del Amanecer",
-    locale: "es_EC",
-    type: "website",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Vista aérea del Ashram Caminantes del Amanecer con su logo" }],
-  },
-  twitter: { card: "summary_large_image", images: ["/og.jpg"] },
+  metadataBase: new URL(SITE_URL),
+  ...seo({ path: "/" }),
+  keywords: ["ashram", "Shiva Kriya Yoga", "retiro espiritual", "yoga", "meditación", "Cuenca", "Ecuador", "Mataji Shaktiananda", "Babaji"],
+};
+
+// Structured data so search engines know the ashram as a place you can visit and stay at.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "@id": `${SITE_URL}/#ashram`,
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  url: `${SITE_URL}/`,
+  image: `${SITE_URL}/og.jpg`,
+  logo: `${SITE_URL}/brand/icono.svg`,
+  telephone: site.phone,
+  email: site.email,
+  address: { "@type": "PostalAddress", addressLocality: "Sustag", addressRegion: "Azuay", addressCountry: "EC" },
+  sameAs: [site.social.instagram, site.social.facebook].filter(Boolean),
 };
 
 export const viewport: Viewport = { themeColor: "#1f343e" };
@@ -40,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
           <Header />
           {children}

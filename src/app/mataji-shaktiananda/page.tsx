@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { PageHero, Quote, VideoSection } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
@@ -7,7 +8,7 @@ import { maestros, matajiQuote } from "@/data/maestros";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
-export const metadata: Metadata = { title: `Mataji Shaktiananda · ${site.name}` };
+export const metadata: Metadata = seo({ title: "Mataji Shaktiananda", description: "Shaktiananda Ma, discípula directa del Mahavatar Babaji y guía espiritual del Ashram Caminantes del Amanecer. Conoce su vida, su enseñanza y el Shiva Kriya Yoga.", path: "/mataji-shaktiananda/" });
 
 export default function Page() {
   const mataji = maestros[0];

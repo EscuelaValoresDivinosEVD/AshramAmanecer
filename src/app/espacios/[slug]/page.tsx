@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero, SecHead } from "@/components/site/Blocks";
@@ -14,7 +15,7 @@ export const generateStaticParams = () => espacios.map((e) => ({ slug: e.slug })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const e = getEspacio((await params).slug);
-  return e ? { title: `${e.name} · ${site.name}`, description: e.text.slice(0, 160) } : {};
+  return e ? seo({ title: e.name, description: `${e.kind}. ${e.text}`, path: `/espacios/${e.slug}/` }) : {};
 }
 
 export default async function Page({ params }: Props) {

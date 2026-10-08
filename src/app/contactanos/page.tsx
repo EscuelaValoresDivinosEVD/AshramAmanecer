@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/Blocks";
 import FormEmbed from "@/components/site/FormEmbed";
@@ -6,7 +7,7 @@ import { mostrarTalleres } from "@/data/eventos";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
-export const metadata: Metadata = { title: `Contáctanos · ${site.name}` };
+export const metadata: Metadata = seo({ title: "Contáctanos", description: "Escríbenos o llámanos para reservar tu estadía, retiro o visita al Ashram Caminantes del Amanecer en Sustag, a 30 minutos de Cuenca, Ecuador.", path: "/contactanos/" });
 
 export default function Page() {
   return (

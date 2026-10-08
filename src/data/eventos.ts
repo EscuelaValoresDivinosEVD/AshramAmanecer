@@ -14,4 +14,8 @@ export type Evento = {
 };
 
 export const eventosSample: boolean = data.ejemplos;
+/** Talleres y retiros on/off: when false the section is hidden everywhere
+ * (menu, header, footer, home, its page) but all its content stays saved. */
+export const mostrarTalleres: boolean = data.mostrar;
+export const TALLERES_PATH = "/talleres-y-retiros/";
 export const eventos: Evento[] = data.eventos;

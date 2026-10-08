@@ -278,6 +278,10 @@ content:
     path: src/content/eventos.json
     format: json
     fields:
+      - name: mostrar
+        label: Mostrar la sección Talleres y retiros
+        type: boolean
+        description: Apagado = la sección se oculta en todo el sitio (menú, inicio, footer y su página). El contenido se conserva.
       - name: ejemplos
         label: Mostrar etiqueta «Ejemplo»
         type: boolean

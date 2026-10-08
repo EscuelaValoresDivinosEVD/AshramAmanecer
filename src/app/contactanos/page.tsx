@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/Blocks";
 import FormEmbed from "@/components/site/FormEmbed";
 import TLink from "@/components/site/TLink";
+import { mostrarTalleres } from "@/data/eventos";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
@@ -19,8 +20,14 @@ export default function Page() {
             <div className="prose">
               <p>
                 Puedes hacernos llegar tu mensaje completando el formulario. Si quieres saber más sobre las próximas
-                actividades programadas junto a Mataji Shaktiananda, te invitamos a que sigas nuestras Redes Sociales o
-                visites el <TLink href="/talleres-y-retiros/">Calendario de Actividades</TLink>.
+                actividades programadas junto a Mataji Shaktiananda, te invitamos a que sigas nuestras Redes Sociales
+                {mostrarTalleres ? (
+                  <>
+                    {" "}o visites el <TLink href="/talleres-y-retiros/">Calendario de Actividades</TLink>.
+                  </>
+                ) : (
+                  "."
+                )}
               </p>
             </div>
             <ul className="contact-list">

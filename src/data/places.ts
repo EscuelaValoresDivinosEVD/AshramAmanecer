@@ -11,7 +11,7 @@ export type Place = {
   name: string;
   /** PROVISIONAL short description — replace with real copy. */
   tagline: string;
-  /** Page the building opens. Buildings not yet identified use /lugares/<slug>/. */
+  /** Page the building opens. Without it the building only glows and shows its name (no click). */
   href?: string;
   image: string;
   x: number;

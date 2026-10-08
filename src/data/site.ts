@@ -1,4 +1,8 @@
 import sitio from "@/content/sitio.json";
+import { mostrarTalleres, TALLERES_PATH } from "./eventos";
+
+// Drop links to Talleres y retiros while that section is switched off.
+const visible = <T extends { href: string }>(links: T[]) => links.filter((l) => mostrarTalleres || l.href !== TALLERES_PATH);
 
 // Global site data: navigation and forms. Contact details are editable in
 // src/content/sitio.json (Pages CMS).
@@ -32,7 +36,7 @@ export type NavLink = { label: string; href: string; external?: boolean };
 export type NavGroup = { label: string; links: NavLink[] };
 
 /** Drawer menu (grouped, like the reference's side panel). */
-export const menu: NavGroup[] = [
+export const menu: NavGroup[] = ([
   {
     label: "El Ashram",
     links: [
@@ -62,19 +66,19 @@ export const menu: NavGroup[] = [
       { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
     ],
   },
-];
+] as NavGroup[]).map((g) => ({ ...g, links: visible(g.links) }));
 
 /** Header pills: left and right of the centred logo. */
 export const headerLeft: NavLink[] = [
   { label: "Espacios", href: "/espacios/" },
   { label: "Experimentar", href: "/experimentar-el-ashram/" },
 ];
-export const headerRight: NavLink[] = [
+export const headerRight: NavLink[] = visible([
   { label: "Talleres y retiros", href: "/talleres-y-retiros/" },
   { label: "Contáctanos", href: "/contactanos/" },
-];
+])
 
-export const footerColumns: NavGroup[] = [
+export const footerColumns: NavGroup[] = ([
   {
     label: "El Ashram",
     links: [
@@ -106,4 +110,4 @@ export const footerColumns: NavGroup[] = [
       { label: "Contáctanos", href: "/contactanos/" },
     ],
   },
-];
+] as NavGroup[]).map((g) => ({ ...g, links: visible(g.links) }));

@@ -9,6 +9,7 @@ import Rail from "@/components/site/Rail";
 import TLink from "@/components/site/TLink";
 import home from "@/content/inicio.json";
 import { espacios } from "@/data/espacios";
+import { mostrarTalleres } from "@/data/eventos";
 import { matajiQuote } from "@/data/maestros";
 import { site } from "@/data/site";
 
@@ -94,6 +95,7 @@ export default function Home() {
         </div>
       </section>
 
+      {mostrarTalleres && (
       <section className="sec bg-crema-2">
         <div className="wrap">
           <SecHead
@@ -108,6 +110,7 @@ export default function Home() {
           <EventList />
         </div>
       </section>
+      )}
 
       <Route {...route} />
 

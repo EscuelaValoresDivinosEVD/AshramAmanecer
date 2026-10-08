@@ -112,7 +112,7 @@ html.lenis body {
 .is-open .map-stage {
   pointer-events: auto;
 }
-.map-stage.has-active {
+.map-stage.is-link {
   cursor: pointer;
 }
 

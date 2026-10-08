@@ -3,13 +3,16 @@ import { PageHero, SecHead } from "@/components/site/Blocks";
 import Cta from "@/components/site/Cta";
 import EventList from "@/components/site/EventList";
 import Panels from "@/components/site/Panels";
-import { eventos } from "@/data/eventos";
+import { notFound } from "next/navigation";
+import { eventos, mostrarTalleres } from "@/data/eventos";
 import { site } from "@/data/site";
 import fotos from "@/content/portadas.json";
 
 export const metadata: Metadata = { title: `Talleres y retiros · ${site.name}` };
 
 export default function Page() {
+  // Switched off in src/content/eventos.json («mostrar»): no page is published.
+  if (!mostrarTalleres) notFound();
   return (
     <main>
       <PageHero

@@ -158,7 +158,8 @@ export default function InteractiveMap() {
   };
 
   const go = (p: Place) => {
-    if (leaving.current) return;
+    // Buildings without a page yet only show their glow and name.
+    if (leaving.current || !p.href) return;
     leaving.current = true;
     setActive(p.slug);
     // Dive into the building while the page veil comes in.
@@ -166,7 +167,7 @@ export default function InteractiveMap() {
     const b = stage.current!.querySelector<HTMLElement>(`[data-slug="${p.slug}"]`)!.getBoundingClientRect();
     gsap.set(zoom.current, { transformOrigin: `${b.left + b.width / 2 - z.left}px ${b.top + b.height / 2 - z.top}px` });
     gsap.to(zoom.current, { scale: 2.6, duration: 1.2, ease: "power3.in" });
-    navigate(p.href ?? `/lugares/${p.slug}/`);
+    navigate(p.href);
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -217,7 +218,7 @@ export default function InteractiveMap() {
         <div ref={zoom} className="map-zoom">
           <div
             ref={stage}
-            className={`map-stage${activePlace ? " has-active" : ""}`}
+            className={`map-stage${activePlace ? " has-active" : ""}${activePlace?.href ? " is-link" : ""}`}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}

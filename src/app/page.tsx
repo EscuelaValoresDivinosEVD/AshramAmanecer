@@ -69,7 +69,7 @@ export default function Home() {
             <Pic src={kriya.image} alt="" />
             <LazyVideo
               title="Shiva Kriya Yoga en el Ashram"
-              src="https://customer-lgjk79hzuw551moh.cloudflarestream.com/99b40440ead09357ddca16401d5c3012/iframe?muted=true&loop=true&autoplay=true&controls=false&preload=auto"
+              src="/video/kriya.mp4"
             />
           </div>
         </div>

@@ -3,22 +3,40 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Cloudflare Stream background video that only exists while its section is
- * near the viewport, so it never decodes during the cloud intro or elsewhere.
+ * Muted looping background video served from this site (public/video/).
+ * It only loads and plays while its section is near the viewport, so it never
+ * competes with the cloud intro or decodes off-screen.
  */
 export default function LazyVideo({ src, title }: { src: string; title: string }) {
-  const box = useRef<HTMLDivElement>(null);
-  const [on, setOn] = useState(false);
+  const ref = useRef<HTMLVideoElement>(null);
+  const [near, setNear] = useState(false);
 
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => setOn(e.isIntersecting), { rootMargin: "300px 0px" });
-    io.observe(box.current!);
+    const el = ref.current!;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        setNear(e.isIntersecting);
+        if (e.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { rootMargin: "300px 0px" },
+    );
+    io.observe(el);
     return () => io.disconnect();
   }, []);
 
   return (
-    <div ref={box} style={{ position: "absolute", inset: 0 }}>
-      {on && <iframe title={title} src={src} allow="autoplay; encrypted-media" />}
-    </div>
+    <video
+      ref={ref}
+      className="lazy-video"
+      src={near ? src : undefined}
+      title={title}
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="none"
+      aria-hidden
+    />
   );
 }

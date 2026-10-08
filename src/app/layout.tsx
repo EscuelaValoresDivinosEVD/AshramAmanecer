@@ -17,6 +17,17 @@ const cond = Oswald({ subsets: ["latin"], weight: ["400", "500"], variable: "--f
 export const metadata: Metadata = {
   title: "Ashram Caminantes del Amanecer",
   description: "Shiva Kriya Yoga Ashram, un refugio de luz y espiritualidad profunda en los Andes ecuatorianos.",
+  metadataBase: new URL("https://ashramcaminantesdelamanecer.com"),
+  openGraph: {
+    title: "Ashram Caminantes del Amanecer",
+    description: "Shiva Kriya Yoga Ashram, un refugio de luz y espiritualidad profunda en los Andes ecuatorianos.",
+    url: "/",
+    siteName: "Ashram Caminantes del Amanecer",
+    locale: "es_EC",
+    type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Vista aérea del Ashram Caminantes del Amanecer con su logo" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og.jpg"] },
 };
 
 export const viewport: Viewport = { themeColor: "#1f343e" };

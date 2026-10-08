@@ -21,7 +21,7 @@ export const site = {
     facebook: sitio.facebook,
   },
   forms: {
-    contact: "https://api.leadconnectorhq.com/widget/form/I0iOIno9ELSuf1r3tSrB",
+    contact: "https://api.leadconnectorhq.com/widget/form/xmZtDdlOE7JVlEo9HHFC",
     newsletter: "https://api.leadconnectorhq.com/widget/form/ShGG4vqPjgjU4jA3G0FU",
   },
   external: {

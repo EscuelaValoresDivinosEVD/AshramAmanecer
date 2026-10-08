@@ -53,7 +53,7 @@ export default function Page() {
             </ul>
           </div>
           <div className="contact-form" data-reveal>
-            <FormEmbed src={site.forms.contact} title="Contacto" height={520} />
+            <FormEmbed src={site.forms.contact} title="Registro" height={492} />
           </div>
         </div>
       </section>

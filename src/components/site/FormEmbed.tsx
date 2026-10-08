@@ -20,6 +20,9 @@ export default function FormEmbed({ src, title, height }: { src: string; title: 
         data-form-name={title}
         data-height={height}
         data-form-id={id}
+        data-layout-iframe-id={`inline-${id}`}
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
       />
       <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
     </div>

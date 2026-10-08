@@ -25,9 +25,9 @@
   },
   {
     "slug": "kiosco",
-    "name": "Kiosco",
-    "tagline": "Pausa entre caminos",
-    "href": ""
+    "name": "Hanuman Mandir",
+    "tagline": "Templo de la devoción",
+    "href": "/espacios/hanuman-mandir/"
   },
   {
     "slug": "comedor",
@@ -52,6 +52,24 @@
     "name": "Salón de los Maestros",
     "tagline": "Amrita Shala",
     "href": "/espacios/amrita-shala/"
+  },
+  {
+    "slug": "cabana-gauri",
+    "name": "Cabaña Gauri",
+    "tagline": "",
+    "href": ""
+  },
+  {
+    "slug": "biblioteca",
+    "name": "Biblioteca",
+    "tagline": "Salón Saraswati",
+    "href": "/espacios/salon-saraswati/"
+  },
+  {
+    "slug": "plaza-de-jesus",
+    "name": "Plaza de Jesús",
+    "tagline": "",
+    "href": ""
   },
   {
     "slug": "maha-mrityunjaya-mandir",

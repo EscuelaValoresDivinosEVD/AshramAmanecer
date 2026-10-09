@@ -28,6 +28,8 @@ const pages: [string, string][] = [
   ["/pagina-ejemplo/", "/"],
   ["/sample-page/", "/"],
   ["/wp-admin/*", "/"],
+  // Provisional map pages that were briefly online (now unpublished).
+  ["/lugares/*", "/"],
   ["/wp-login.php", "/"],
   ["/feed/*", "/"],
 ];

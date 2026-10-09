@@ -6,7 +6,7 @@ import { espacios } from "@/data/espacios";
 import { caminos } from "@/data/caminos";
 import { useAlphaMasks } from "../InteractiveMap";
 
-// Area that holds every place, with a margin: the starting view shows it whole.
+// Area that holds every place, with a margin.
 const PAD = 160;
 const BOX = {
   x0: Math.min(...places.map((p) => p.x)) - PAD,
@@ -14,25 +14,21 @@ const BOX = {
   x1: Math.max(...places.map((p) => p.x + p.w)) + PAD,
   y1: Math.max(...places.map((p) => p.y + p.h)) + PAD,
 };
-const MAX_ZOOM = 6; // times the starting scale
-const PANEL_SPACE = 120; // bottom chips/hint strip
 const ORDER = [...places].sort((a, b) => a.x - b.x);
-
 const coverOf = (p: Place) => espacios.find((e) => p.href === `/espacios/${e.slug}/`)?.images[0];
 
-type Label = { p: Place; left: number; top: number; w: number; ax: number; ay: number };
+type View = { k: number; x: number; y: number }; // scale (screen px per photo px) and photo origin on screen
+type Label = { p: Place; dx: number; dy: number; w: number; lx: number; ly: number };
 
-/** Lay labels out in screen pixels so they do not overlap: above, below, left or right of each building. */
+/** Place labels around each building (screen px, relative to the building centre) so they do not overlap. */
 function layoutLabels(k: number, active: string | null): Label[] {
   const placed: { l: number; t: number; r: number; b: number }[] = [];
   const hits = (a: { l: number; t: number; r: number; b: number }) => placed.some((o) => a.l < o.r && a.r > o.l && a.t < o.b && a.b > o.t);
-  // Active first, then larger buildings.
   const order = [...places].sort((a, b) => (a.slug === active ? -1 : b.slug === active ? 1 : b.w * b.h - a.w * a.h));
   return order.map((p) => {
     const w = p.name.length * 7 + 22, h = 24;
-    const cx = (p.x + p.w / 2) * k, top = p.y * k, bottom = (p.y + p.h) * k, left = p.x * k, right = (p.x + p.w) * k, cy = (p.y + p.h / 2) * k;
-    // Candidates: above, below, beside, then rings further out; kept inside the starting view.
-    const minL = BOX.x0 * k + 4, maxL = BOX.x1 * k - w - 4;
+    const cx = (p.x + p.w / 2) * k, cy = (p.y + p.h / 2) * k;
+    const top = p.y * k, bottom = (p.y + p.h) * k, left = p.x * k, right = (p.x + p.w) * k;
     const base = [
       { l: cx - w / 2, t: top - h - 6 },
       { l: cx - w / 2, t: bottom + 6 },
@@ -45,225 +41,274 @@ function layoutLabels(k: number, active: string | null): Label[] {
         t: top - h - 6 + Math.sin((deg * Math.PI) / 180) * r,
       })),
     );
-    const options = [...base, ...rings].map((o) => ({ l: Math.max(minL, Math.min(maxL, o.l)), t: o.t }));
-    const pick = options.find((o) => !hits({ l: o.l - 3, t: o.t - 3, r: o.l + w + 3, b: o.t + h + 3 })) ?? options[0];
+    const pick = [...base, ...rings].find((o) => !hits({ l: o.l - 3, t: o.t - 3, r: o.l + w + 3, b: o.t + h + 3 })) ?? base[0];
     placed.push({ l: pick.l, t: pick.t, r: pick.l + w, b: pick.t + h });
-    // Leader line: from the label edge nearest the building to the building's centre.
+    // Leader line end on the label edge nearest the building centre.
     const lx = Math.max(pick.l, Math.min(pick.l + w, cx)), ly = Math.max(pick.t, Math.min(pick.t + h, cy));
-    return { p, left: pick.l + w / 2, top: pick.t, w, ax: lx, ay: ly };
+    return { p, dx: pick.l - cx, dy: pick.t - cy, w, lx: lx - cx, ly: ly - cy };
   });
 }
 
-/** Visitor-app map: whole ashram at a glance, every place named; pinch or +/− to zoom, tap for details. */
+/**
+ * Visitor-app map, handled like a photo: drag to move (with inertia), pinch
+ * or double-tap to zoom, tap a building for its card. Labels keep their size.
+ */
 export default function AppMap() {
-  const scroller = useRef<HTMLDivElement>(null);
+  const box = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const [kMin, setKMin] = useState(0);
-  const [k, setK] = useState(0);
+  const view = useRef<View>({ k: 0, x: 0, y: 0 });
+  const limits = useRef({ min: 0.05, max: 1.2 });
+  const anim = useRef(0);
+  const [labelK, setLabelK] = useState(0); // scale the labels were laid out for
   const [active, setActive] = useState<string | null>(null);
   const hitTest = useAlphaMasks();
   const activePlace = places.find((p) => p.slug === active);
-  // Image point to keep at a screen point after the next scale change.
-  const anchor = useRef<{ ix: number; iy: number; sx: number; sy: number } | null>(null);
 
-  const visibleH = () => (scroller.current?.clientHeight ?? 0) - (panel.current?.offsetHeight ?? PANEL_SPACE);
+  const size = () => {
+    const el = box.current!;
+    return { w: el.clientWidth, h: el.clientHeight, free: el.clientHeight - (panel.current?.offsetHeight ?? 0) };
+  };
 
-  // Starting scale: the whole built area fits above the bottom panel.
-  useLayoutEffect(() => {
-    const fit = () => {
-      const sc = scroller.current;
-      if (!sc) return;
-      const km = Math.min(sc.clientWidth / (BOX.x1 - BOX.x0), Math.max(120, visibleH()) / (BOX.y1 - BOX.y0));
-      setKMin(km);
-      setK((cur) => (cur ? Math.max(cur, km) : km));
-    };
-    fit();
-    window.addEventListener("resize", fit);
-    return () => window.removeEventListener("resize", fit);
+  // Keep the photo covering the screen; centre it when it is smaller.
+  const clamp = (v: View): View => {
+    const { w, h } = size();
+    const pw = MAP_WIDTH * v.k, ph = MAP_HEIGHT * v.k;
+    const x = pw <= w ? (w - pw) / 2 : Math.min(0, Math.max(w - pw, v.x));
+    const y = ph <= h ? (h - ph) / 2 : Math.min(0, Math.max(h - ph, v.y));
+    return { k: v.k, x, y };
+  };
+
+  const apply = useCallback((v: View) => {
+    view.current = v;
+    const s = stage.current;
+    if (!s) return;
+    s.style.transform = `translate3d(${v.x}px, ${v.y}px, 0) scale(${v.k})`;
+    s.style.setProperty("--inv", String(1 / v.k));
   }, []);
 
-  // Stage is at least as big as the viewport: the photo is centred when smaller.
-  const stageW = MAP_WIDTH * k, stageH = MAP_HEIGHT * k;
-
-  const centerOn = useCallback((ix: number, iy: number, scale: number, smooth = false) => {
-    const sc = scroller.current;
-    if (!sc) return;
-    sc.scrollTo({ left: ix * scale - sc.clientWidth / 2, top: iy * scale - visibleH() / 2, behavior: smooth ? "smooth" : "auto" });
+  // Re-lay out labels once the view settles (not on every frame).
+  const settle = useRef(0);
+  const settleLabels = useCallback(() => {
+    clearTimeout(settle.current);
+    settle.current = window.setTimeout(() => setLabelK(view.current.k), 120);
   }, []);
 
-  // First view: the whole built area, or ?lugar=<slug> (links from the schedule).
-  const started = useRef(false);
-  useLayoutEffect(() => {
-    if (!k || started.current) return;
-    started.current = true;
-    const p = places.find((q) => q.slug === new URLSearchParams(window.location.search).get("lugar"));
-    if (p) {
-      setActive(p.slug);
-      anchor.current = { ix: p.x + p.w / 2, iy: p.y + p.h / 2, sx: -1, sy: -1 };
-      setK(kMin * 2.2);
-    } else centerOn((BOX.x0 + BOX.x1) / 2, (BOX.y0 + BOX.y1) / 2, k);
-  }, [k, kMin, centerOn]);
-
-  // After a scale change, scroll so the anchored point stays put.
-  useLayoutEffect(() => {
-    const a = anchor.current, sc = scroller.current;
-    if (!a || !sc) return;
-    anchor.current = null;
-    if (a.sx < 0) return centerOn(a.ix, a.iy, k);
-    sc.scrollLeft = a.ix * k - a.sx;
-    sc.scrollTop = a.iy * k - a.sy;
-  }, [k, centerOn]);
-
-  const zoomTo = useCallback(
-    (next: number, sx?: number, sy?: number) => {
-      const sc = scroller.current;
-      if (!sc || !kMin) return;
-      const nk = Math.max(kMin, Math.min(kMin * MAX_ZOOM, next));
-      const px = sx ?? sc.clientWidth / 2, py = sy ?? visibleH() / 2;
-      anchor.current = { ix: (sc.scrollLeft + px) / k, iy: (sc.scrollTop + py) / k, sx: px, sy: py };
-      setK(nk);
+  const animateTo = useCallback(
+    (target: View, ms = 450) => {
+      cancelAnimationFrame(anim.current);
+      const from = { ...view.current }, to = clamp(target), t0 = performance.now();
+      const step = (t: number) => {
+        const e = Math.min(1, (t - t0) / ms), q = 1 - Math.pow(1 - e, 3);
+        apply({ k: from.k + (to.k - from.k) * q, x: from.x + (to.x - from.x) * q, y: from.y + (to.y - from.y) * q });
+        if (e < 1) anim.current = requestAnimationFrame(step);
+        else settleLabels();
+      };
+      anim.current = requestAnimationFrame(step);
     },
-    [k, kMin],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [apply, settleLabels],
   );
 
-  // Pinch to zoom (two fingers); one finger scrolls natively.
+  // Zoom to scale k keeping screen point (sx, sy) fixed.
+  const zoomAt = (v: View, k: number, sx: number, sy: number): View => {
+    const kk = Math.max(limits.current.min, Math.min(limits.current.max, k));
+    return { k: kk, x: sx - ((sx - v.x) / v.k) * kk, y: sy - ((sy - v.y) / v.k) * kk };
+  };
+
+  // View centred on photo point (ix, iy) at scale k, in the space above the bottom panel.
+  const centred = (ix: number, iy: number, k: number): View => {
+    const { w, free } = size();
+    return { k, x: w / 2 - ix * k, y: free / 2 - iy * k };
+  };
+
+  // Starting view: the photo fills the screen height, centred on the ashram.
+  useLayoutEffect(() => {
+    const init = () => {
+      const { w, h } = size();
+      const cover = Math.max(w / MAP_WIDTH, h / MAP_HEIGHT);
+      limits.current = { min: Math.min(cover, w / (BOX.x1 - BOX.x0)), max: cover * 4 };
+      const first = !view.current.k;
+      if (!first) return apply(clamp(view.current));
+      const p = places.find((q) => q.slug === new URLSearchParams(window.location.search).get("lugar"));
+      if (p) {
+        setActive(p.slug);
+        apply(clamp(centred(p.x + p.w / 2, p.y + p.h / 2, cover * 2)));
+      } else apply(clamp(centred((BOX.x0 + BOX.x1) / 2, (BOX.y0 + BOX.y1) / 2, cover)));
+      setLabelK(view.current.k);
+    };
+    init();
+    window.addEventListener("resize", init);
+    return () => window.removeEventListener("resize", init);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const focus = useCallback(
+    (p: Place) => {
+      setActive(p.slug);
+      // Wait a frame so the bottom card has its height.
+      requestAnimationFrame(() => {
+        const cover = Math.max(size().w / MAP_WIDTH, size().h / MAP_HEIGHT);
+        animateTo(centred(p.x + p.w / 2, p.y + p.h / 2, Math.min(cover * 3, Math.max(view.current.k, cover * 1.8))));
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [animateTo],
+  );
+
+  // Gestures: one finger pans (with inertia), two fingers pinch, double tap zooms, tap selects.
   useEffect(() => {
-    const sc = scroller.current;
-    if (!sc) return;
-    let start: { d: number; k: number } | null = null;
-    const dist = (t: TouchList) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
-    const mid = (t: TouchList) => {
-      const r = sc.getBoundingClientRect();
-      return [(t[0].clientX + t[1].clientX) / 2 - r.left, (t[0].clientY + t[1].clientY) / 2 - r.top];
+    const el = box.current!;
+    const pts = new Map<number, { x: number; y: number }>();
+    let last: { d: number; mx: number; my: number } | null = null;
+    let moved = 0;
+    let vel = { x: 0, y: 0, t: 0 };
+    let lastTap = { t: 0, x: 0, y: 0 };
+    const local = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
     };
-    const onStart = (e: TouchEvent) => {
-      if (e.touches.length === 2) start = { d: dist(e.touches), k };
+    const gesture = () => {
+      const [a, b] = [...pts.values()];
+      return b ? { d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 } : { d: 0, mx: a.x, my: a.y };
     };
-    const onMove = (e: TouchEvent) => {
-      if (!start || e.touches.length !== 2) return;
+
+    const down = (e: PointerEvent) => {
+      if ((e.target as HTMLElement).closest("button, a")) return;
+      cancelAnimationFrame(anim.current);
+      el.setPointerCapture(e.pointerId);
+      pts.set(e.pointerId, local(e));
+      if (pts.size === 1) moved = 0;
+      last = gesture();
+      vel = { x: 0, y: 0, t: performance.now() };
+    };
+    const move = (e: PointerEvent) => {
+      if (!pts.has(e.pointerId) || !last) return;
+      pts.set(e.pointerId, local(e));
+      const g = gesture();
+      let v = { ...view.current, x: view.current.x + g.mx - last.mx, y: view.current.y + g.my - last.my };
+      if (g.d && last.d) v = zoomAt(v, v.k * (g.d / last.d), g.mx, g.my);
+      const now = performance.now(), dt = Math.max(1, now - vel.t);
+      vel = { x: (g.mx - last.mx) / dt, y: (g.my - last.my) / dt, t: now };
+      moved += Math.abs(g.mx - last.mx) + Math.abs(g.my - last.my) + Math.abs(g.d - last.d);
+      apply(clamp(v));
+      last = g;
+    };
+    const up = (e: PointerEvent) => {
+      if (!pts.has(e.pointerId)) return;
+      const p = local(e);
+      const wasPinch = pts.size > 1;
+      pts.delete(e.pointerId);
+      last = pts.size ? gesture() : null;
+      if (pts.size) return;
+      if (moved < 8 && !wasPinch) {
+        const now = performance.now();
+        if (now - lastTap.t < 300 && Math.hypot(p.x - lastTap.x, p.y - lastTap.y) < 30) {
+          // Double tap: zoom in there, or back out when already close.
+          const v = view.current;
+          const k = v.k * 2.2 > limits.current.max ? limits.current.min : v.k * 2.2;
+          animateTo(zoomAt(v, k, p.x, p.y), 350);
+          lastTap = { t: 0, x: 0, y: 0 };
+          return;
+        }
+        lastTap = { t: now, x: p.x, y: p.y };
+        const v = view.current;
+        const hit = hitTest((p.x - v.x) / v.k, (p.y - v.y) / v.k);
+        if (hit) focus(hit);
+        else setActive(null);
+        return;
+      }
+      // Inertia after a flick.
+      if (performance.now() - vel.t > 80) return settleLabels();
+      let { x: vx, y: vy } = vel;
+      const glide = () => {
+        vx *= 0.94;
+        vy *= 0.94;
+        apply(clamp({ ...view.current, x: view.current.x + vx * 16, y: view.current.y + vy * 16 }));
+        if (Math.abs(vx) + Math.abs(vy) > 0.02) anim.current = requestAnimationFrame(glide);
+        else settleLabels();
+      };
+      anim.current = requestAnimationFrame(glide);
+    };
+    // Trackpad pinch (ctrl+wheel) zooms; plain wheel pans.
+    const wheel = (e: WheelEvent) => {
       e.preventDefault();
-      const [mx, my] = mid(e.touches);
-      zoomTo(start.k * (dist(e.touches) / start.d), mx, my);
+      const r = el.getBoundingClientRect();
+      const v = view.current;
+      if (e.ctrlKey) apply(clamp(zoomAt(v, v.k * Math.exp(-e.deltaY * 0.01), e.clientX - r.left, e.clientY - r.top)));
+      else apply(clamp({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY }));
+      settleLabels();
     };
-    const onEnd = (e: TouchEvent) => {
-      if (e.touches.length < 2) start = null;
-    };
-    // Trackpad pinch / ctrl+wheel on computers.
-    const onWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey) return;
-      e.preventDefault();
-      const r = sc.getBoundingClientRect();
-      zoomTo(k * Math.exp(-e.deltaY * 0.01), e.clientX - r.left, e.clientY - r.top);
-    };
-    sc.addEventListener("touchstart", onStart, { passive: true });
-    sc.addEventListener("touchmove", onMove, { passive: false });
-    sc.addEventListener("touchend", onEnd);
-    sc.addEventListener("wheel", onWheel, { passive: false });
+    el.addEventListener("pointerdown", down);
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerup", up);
+    el.addEventListener("pointercancel", up);
+    el.addEventListener("wheel", wheel, { passive: false });
     return () => {
-      sc.removeEventListener("touchstart", onStart);
-      sc.removeEventListener("touchmove", onMove);
-      sc.removeEventListener("touchend", onEnd);
-      sc.removeEventListener("wheel", onWheel);
+      el.removeEventListener("pointerdown", down);
+      el.removeEventListener("pointermove", move);
+      el.removeEventListener("pointerup", up);
+      el.removeEventListener("pointercancel", up);
+      el.removeEventListener("wheel", wheel);
     };
-  }, [k, zoomTo]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus, hitTest]);
 
-  const focus = (p: Place) => {
-    setActive(p.slug);
-    const target = Math.max(k, kMin * 2.2);
-    if (target !== k) {
-      anchor.current = { ix: p.x + p.w / 2, iy: p.y + p.h / 2, sx: -1, sy: -1 };
-      setK(target);
-    } else centerOn(p.x + p.w / 2, p.y + p.h / 2, k, true);
-  };
-
-  const onStageClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const hit = hitTest(((e.clientX - r.left) / r.width) * MAP_WIDTH, ((e.clientY - r.top) / r.height) * MAP_HEIGHT);
-    if (hit) focus(hit);
-    else setActive(null);
-  };
-
-  const labels = useMemo(() => (k ? layoutLabels(k, active) : []), [k, active]);
+  const labels = useMemo(() => (labelK ? layoutLabels(labelK, active) : []), [labelK, active]);
   const cover = activePlace && coverOf(activePlace);
-  const zoomed = kMin ? k / kMin : 1;
 
   return (
     <main className="amap">
-      <div ref={scroller} className="amap-scroll">
-        <div className="amap-canvas" style={{ width: `max(100%, ${stageW}px)`, height: `max(100%, ${stageH + PANEL_SPACE}px)` }}>
-          <div className={`amap-stage${activePlace ? " has-active" : ""}`} style={{ width: stageW, height: stageH }} onClick={onStageClick}>
-            <img
-              className="map-base"
-              src="/map/base-2600.webp"
-              srcSet="/map/base-1600.webp 1600w, /map/base-2600.webp 2600w, /map/base-3600.webp 3600w"
-              sizes={`${Math.round(stageW)}px`}
-              alt="Vista aérea del Ashram"
-              draggable={false}
-            />
-            <div className="amap-shade" />
-            <svg className="amap-roads" viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} preserveAspectRatio="none" aria-hidden>
-              {caminos.map((c, i) => {
-                const d = c.puntos.map(([x, y], j) => `${j ? "L" : "M"}${x} ${y}`).join(" ");
-                return (
-                  <g key={i} className={`road road-${c.tipo}`}>
-                    <path d={d} className="road-casing" />
-                    <path d={d} className="road-line" />
-                  </g>
-                );
-              })}
-            </svg>
-            {places.map((p) => (
-              <div
-                key={p.slug}
-                className={`abld${active === p.slug ? " is-active" : ""}`}
-                style={{ left: p.x * k, top: p.y * k, width: p.w * k, height: p.h * k }}
-              >
-                <span className="bld-glow" />
-                <img src={p.image} alt="" draggable={false} decoding="async" />
-              </div>
-            ))}
-            <svg className="amap-leaders" width={stageW} height={stageH} aria-hidden>
-              {labels.map(({ p, ax, ay }) => (
-                <line key={p.slug} x1={ax} y1={ay} x2={(p.x + p.w / 2) * k} y2={(p.y + p.h / 2) * k} className={active === p.slug ? "is-active" : ""} />
-              ))}
-            </svg>
-            {labels.map(({ p, left, top, w }) => (
+      <div ref={box} className="amap-view">
+        <img className="amap-backdrop" src="/map/base-blur.webp" alt="" aria-hidden />
+        <div ref={stage} className={`amap-stage${activePlace ? " has-active" : ""}`} style={{ width: MAP_WIDTH, height: MAP_HEIGHT }}>
+          <img
+            className="map-base"
+            src="/map/base-2600.webp"
+            srcSet="/map/base-1600.webp 1600w, /map/base-2600.webp 2600w, /map/base-3600.webp 3600w"
+            sizes="300vh"
+            alt="Vista aérea del Ashram"
+            draggable={false}
+          />
+          <div className="amap-shade" />
+          <svg className="amap-roads" viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} aria-hidden>
+            {caminos.map((c, i) => {
+              const d = c.puntos.map(([x, y], j) => `${j ? "L" : "M"}${x} ${y}`).join(" ");
+              return (
+                <g key={i} className={`road road-${c.tipo}`}>
+                  <path d={d} className="road-casing" />
+                  <path d={d} className="road-line" />
+                </g>
+              );
+            })}
+          </svg>
+          {places.map((p) => (
+            <div key={p.slug} className={`abld${active === p.slug ? " is-active" : ""}`} style={{ left: p.x, top: p.y, width: p.w, height: p.h }}>
+              <span className="bld-glow" />
+              <img src={p.image} alt="" draggable={false} decoding="async" />
+            </div>
+          ))}
+          {labels.map(({ p, dx, dy, w, lx, ly }) => (
+            // Pinned to the building centre; counter-scaled so text keeps its size.
+            <div key={p.slug} className="amap-pin" style={{ left: p.x + p.w / 2, top: p.y + p.h / 2 }}>
+              <span
+                className={`amap-leader${active === p.slug ? " is-active" : ""}`}
+                style={{ width: Math.hypot(lx, ly), transform: `rotate(${Math.atan2(ly, lx)}rad)` }}
+              />
               <button
-                key={p.slug}
                 type="button"
                 className={`amap-label${active === p.slug ? " is-active" : ""}`}
-                style={{ left, top, minWidth: w }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  focus(p);
-                }}
+                style={{ left: dx, top: dy, minWidth: w }}
+                onClick={() => focus(p)}
               >
                 {p.name}
               </button>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
       <div ref={panel} className="amap-panel">
-        <div className="amap-zoom">
-        <button type="button" onClick={() => zoomTo(k * 1.6)} disabled={zoomed >= MAX_ZOOM - 0.01} aria-label="Acercar">+</button>
-        <button type="button" onClick={() => zoomTo(k / 1.6)} disabled={zoomed <= 1.01} aria-label="Alejar">−</button>
-        <button
-          type="button"
-          className="amap-fit"
-          onClick={() => {
-            setActive(null);
-            anchor.current = { ix: (BOX.x0 + BOX.x1) / 2, iy: (BOX.y0 + BOX.y1) / 2, sx: -1, sy: -1 };
-            if (k === kMin) centerOn(anchor.current.ix, anchor.current.iy, k, true), (anchor.current = null);
-            else setK(kMin);
-          }}
-          aria-label="Ver todo el Ashram"
-        >
-          ⤢
-        </button>
-        </div>
-
         {activePlace ? (
           <div className="amap-sheet">
             <button type="button" className="amap-close" onClick={() => setActive(null)} aria-label="Cerrar">×</button>

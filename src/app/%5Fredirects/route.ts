@@ -40,6 +40,8 @@ export function GET() {
   const both = pages.flatMap(([from, to]): [string, string][] =>
     from.includes("*") || from.includes(".") ? [[from, to]] : [[from.replace(/\/$/, ""), to], [from.replace(/\/?$/, "/"), to]]
   );
-  const lines = [...both, ...images].map(([from, to]) => `${from} ${to} 301`);
+  // Exact rules first: Cloudflare only allows 100 rules after the first one with a splat (*).
+  const rules = [...both, ...images];
+  const lines = [...rules.filter(([f]) => !f.includes("*")), ...rules.filter(([f]) => f.includes("*"))].map(([from, to]) => `${from} ${to} 301`);
   return new Response([...new Set(lines)].join("\n") + "\n", { headers: { "content-type": "text/plain" } });
 }

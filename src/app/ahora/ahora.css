@@ -258,28 +258,137 @@
   overscroll-behavior: contain;
   scrollbar-width: none;
   isolation: isolate;
-  /* Room to scroll the bottom of the photo above the panel. */
-  padding-bottom: 230px;
 }
 .amap-scroll::-webkit-scrollbar {
   display: none;
 }
+.amap-canvas {
+  display: grid;
+  place-items: center;
+}
 .amap-stage {
   position: relative;
-  height: calc(max(100% + 230px, 100vw * 3090 / 5494) * var(--z, 1));
-  aspect-ratio: 5494 / 3090;
+  /* the panel sits over the bottom: keep the photo centred in the space above it */
+  margin-bottom: 120px;
 }
-.amap-stage .bld-label strong {
-  font-size: 1.05rem;
+.amap-shade {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--noche) / 0.28);
+  pointer-events: none;
+}
+.has-active .amap-shade {
+  background: rgb(var(--noche) / 0.5);
+  transition: background 0.4s;
+}
+
+/* Roads (solid) and footpaths (dashed); widths stay the same at any zoom. */
+.amap-roads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.amap-roads path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.road-casing {
+  stroke: rgb(var(--noche) / 0.55);
+  stroke-width: 6;
+}
+.road-line {
+  stroke: rgb(var(--arena) / 0.95);
+  stroke-width: 3;
+}
+.road-sendero .road-casing {
+  stroke-width: 4;
+}
+.road-sendero .road-line {
+  stroke: rgb(var(--crema) / 0.9);
+  stroke-width: 2;
+  stroke-dasharray: 2 5;
+}
+
+/* Buildings: always outlined so they read as tappable. */
+.abld {
+  position: absolute;
+  pointer-events: none;
+}
+.abld img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 1px rgb(var(--arena))) drop-shadow(0 0 1px rgb(var(--arena))) drop-shadow(0 0 4px rgb(var(--arena) / 0.5));
+}
+.abld .bld-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -6%;
+  width: 150%;
+  height: 70%;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(var(--arena) / 0.7), rgb(var(--arena) / 0.22) 45%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.abld.is-active {
+  z-index: 2;
+}
+.abld.is-active .bld-glow {
+  opacity: 1;
+  animation: glow-breathe 2.8s ease-in-out 0.4s infinite;
+}
+.abld.is-active img {
+  filter: brightness(1.12) drop-shadow(0 0 2px rgb(var(--arena))) drop-shadow(0 0 12px rgb(var(--arena) / 0.8));
+}
+
+.amap-leaders {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.amap-leaders line {
+  stroke: rgb(var(--arena) / 0.75);
+  stroke-width: 1;
+}
+.amap-leaders line.is-active {
+  stroke: rgb(var(--arena));
+  stroke-width: 1.5;
+}
+.amap-label {
+  position: absolute;
+  z-index: 3;
+  translate: -50% 0;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid rgb(var(--arena) / 0.5);
+  border-radius: 999px;
+  background: rgb(var(--noche) / 0.82);
+  color: rgb(var(--arena));
+  font: 600 11.5px/22px var(--body);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+}
+.amap-label.is-active {
+  z-index: 4;
+  background: rgb(var(--arena));
+  color: rgb(var(--noche));
 }
 
 .amap-zoom {
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  right: 12px;
-  display: grid;
+  display: flex;
+  justify-content: flex-end;
   gap: 6px;
+  margin: 0 12px 8px auto;
+  width: max-content;
 }
 .amap-zoom button {
   width: 44px;

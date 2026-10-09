@@ -132,10 +132,11 @@ export default function InteractiveMap() {
 
       gsap.utils.toArray<HTMLElement>(".cloud").forEach((el, i) => {
         const c = CLOUDS[i];
-        gsap.set(el, { xPercent: -50, yPercent: -50 });
+        const flip = c.flip ? -1 : 1;
+        gsap.set(el, { xPercent: -50, yPercent: -50, scaleX: flip });
         tl.to(
           el,
-          { x: `${c.toX}vmax`, y: `${c.toY}vmax`, scale: c.toScale, autoAlpha: c.toOpacity, duration: 0.95, ease: "power1.inOut" },
+          { x: `${c.toX}vmax`, y: `${c.toY}vmax`, scaleX: c.toScale * flip, scaleY: c.toScale, autoAlpha: c.toOpacity, duration: 0.95, ease: "power1.inOut" },
           0.05,
         );
       });
@@ -273,18 +274,18 @@ export default function InteractiveMap() {
         <div className="map-fog" />
         <div className="map-clouds" aria-hidden>
           {CLOUDS.map((c, i) => (
-            <div
+            // The <img> itself is the animated layer: the browser then keeps the
+            // 1600px picture as its texture instead of painting a screen-sized
+            // (×2 on retina) copy per cloud, which ran the GPU out of memory
+            // and showed as missing rectangles while scrolling.
+            <img
               key={i}
               className="cloud"
+              src={`/map/clouds/cloud-${c.src}.webp`}
+              alt=""
+              decoding="async"
               style={{ left: `${c.cx}%`, top: `${c.cy}%`, width: `${c.w}vmax` }}
-            >
-              <img
-                src={`/map/clouds/cloud-${c.src}.webp`}
-                alt=""
-                decoding="async"
-                style={c.flip ? { transform: "scaleX(-1)" } : undefined}
-              />
-            </div>
+            />
           ))}
         </div>
 

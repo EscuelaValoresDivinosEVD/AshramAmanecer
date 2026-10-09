@@ -245,13 +245,10 @@ html.lenis body {
 }
 .cloud {
   position: absolute;
+  max-width: none;
+  height: auto;
   aspect-ratio: 16 / 9;
   will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-.cloud img {
-  width: 100%;
-  height: 100%;
 }
 
 .map-intro {

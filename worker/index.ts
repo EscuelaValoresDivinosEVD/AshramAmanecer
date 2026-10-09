@@ -111,6 +111,11 @@ async function upload(env: Env, body: { name: string; data: string }) {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+    // ahora.<domain>/ opens the visitor app (its pages live under /ahora/).
+    if (url.hostname.startsWith("ahora.") && url.pathname === "/") {
+      url.pathname = "/ahora/";
+      return env.ASSETS.fetch(new Request(url, req));
+    }
     if (!url.pathname.startsWith("/api/admin/")) return env.ASSETS.fetch(req);
     if (req.method !== "POST") return json({ error: "Método no permitido" }, 405);
     if (!env.ADMIN_PASSWORD || !env.GITHUB_TOKEN)

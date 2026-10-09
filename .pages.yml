@@ -302,6 +302,42 @@ content:
             type: string
             description: "Una dirección completa (https://…) o /contactanos/"
 
+  # ─────────────────────────── App del visitante (ahora.) ───────────────────────────
+  - name: ahora
+    label: App «Ahora» — inicio y Fonda
+    type: file
+    path: src/content/ahora.json
+    format: json
+    fields:
+      - { name: bienvenida, label: Texto de bienvenida, type: text }
+      - name: fonda
+        label: Enlace del botón Fonda
+        type: string
+        description: "Dirección completa (https://…). Vacío = el botón aparece como «Muy pronto», sin clic."
+
+  - name: cronograma
+    label: App «Ahora» — Cronograma diario
+    type: file
+    path: src/content/cronograma.json
+    format: json
+    fields:
+      - { name: nota, label: Nota arriba del horario, type: text }
+      - { name: ejemplo, label: Mostrar aviso «Horario de ejemplo», type: boolean, description: Desactívalo cuando cargues el horario real. }
+      - name: actividades
+        label: Actividades
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{hora} · {titulo}" } }
+        fields:
+          - { name: hora, label: Hora de inicio (HH:MM), type: string, required: true, pattern: "^[0-2][0-9]:[0-5][0-9]$" }
+          - { name: fin, label: Hora de fin (HH:MM, opcional), type: string }
+          - { name: titulo, label: Actividad, type: string, required: true }
+          - name: lugar
+            label: Lugar en el mapa
+            type: select
+            options:
+              values: [havan, tryambakeshwar-y-dhuni, devi-mandir, casa-blanca, kiosco, comedor, piramide, shiva-kunda, cabana-del-jardin, cabana-gauri, biblioteca, plaza-de-jesus, maha-mrityunjaya-mandir, casa-del-mirador, yoga-shala]
+          - { name: detalle, label: Detalle (opcional), type: text }
+
   # ─────────────────────────── Fotos de otras páginas ───────────────────────────
   - name: portadas
     label: Fotos de otras páginas

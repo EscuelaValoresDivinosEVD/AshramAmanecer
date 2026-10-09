@@ -29,7 +29,7 @@ const MASK_SCALE = 0.5;
 
 const pct = (v: number, total: number) => `${(v / total) * 100}%`;
 
-function useAlphaMasks() {
+export function useAlphaMasks() {
   const masks = useRef<Record<string, { data: Uint8ClampedArray; w: number; h: number }>>({});
   useEffect(() => {
     places.forEach((p) => {

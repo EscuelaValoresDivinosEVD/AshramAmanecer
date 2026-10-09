@@ -1,0 +1,17 @@
+{
+  "ejemplo": true,
+  "nota": "Horario diario del Ashram. Puede variar en días de retiro o actividades especiales.",
+  "actividades": [
+    { "hora": "05:30", "fin": "06:00", "titulo": "Despertar en silencio", "lugar": "", "detalle": "" },
+    { "hora": "06:00", "fin": "07:00", "titulo": "Meditación Shiva Kriya", "lugar": "maha-mrityunjaya-mandir", "detalle": "" },
+    { "hora": "07:00", "fin": "08:15", "titulo": "Shakti Yoga", "lugar": "yoga-shala", "detalle": "" },
+    { "hora": "08:30", "fin": "09:30", "titulo": "Desayuno", "lugar": "comedor", "detalle": "" },
+    { "hora": "10:00", "fin": "12:30", "titulo": "Karma Yoga", "lugar": "", "detalle": "Servicio desinteresado en los espacios del Ashram (opcional)." },
+    { "hora": "13:00", "fin": "14:00", "titulo": "Almuerzo", "lugar": "comedor", "detalle": "" },
+    { "hora": "14:00", "fin": "17:00", "titulo": "Tiempo libre y estudio", "lugar": "biblioteca", "detalle": "" },
+    { "hora": "17:00", "fin": "18:30", "titulo": "Tandava Kundalini", "lugar": "yoga-shala", "detalle": "" },
+    { "hora": "19:00", "fin": "20:00", "titulo": "Cena", "lugar": "comedor", "detalle": "" },
+    { "hora": "20:00", "fin": "21:00", "titulo": "Satsang y meditación", "lugar": "devi-mandir", "detalle": "" },
+    { "hora": "21:30", "fin": "", "titulo": "Silencio y descanso", "lugar": "", "detalle": "" }
+  ]
+}

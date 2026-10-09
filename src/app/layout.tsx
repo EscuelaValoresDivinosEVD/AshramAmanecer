@@ -7,6 +7,7 @@ import Providers from "@/components/Providers";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import Motion from "@/components/site/Motion";
+import SiteChrome from "@/components/site/SiteChrome";
 import Analytics from "@/components/site/Analytics";
 import "./globals.css";
 import "./site.css";
@@ -50,10 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
-          <Header />
-          {children}
-          <Footer />
-          <Motion />
+          <SiteChrome header={<Header />} footer={<><Footer /><Motion /></>}>
+            {children}
+          </SiteChrome>
           <Analytics />
         </Providers>
       </body>

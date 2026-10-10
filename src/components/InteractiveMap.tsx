@@ -104,6 +104,58 @@ export default function InteractiveMap() {
     if (stage.current) stage.current.style.transform = `translate3d(${p.x}px, 0, 0)`;
   };
 
+  // Clouds: all six are painted on a single screen-sized canvas. As separate
+  // animated layers (each bigger than the screen, doubled on retina) they ran
+  // Chrome out of GPU memory and showed as missing rectangles while scrolling.
+  const cloudCanvas = useRef<HTMLCanvasElement>(null);
+  const cloudImgs = useRef<HTMLImageElement[]>([]);
+  const cloudT = useRef(0);
+  const drawClouds = useCallback((t: number) => {
+    cloudT.current = t;
+    const cv = cloudCanvas.current;
+    const ctx = cv?.getContext("2d");
+    if (!cv || !ctx) return;
+    const W = cv.width, H = cv.height;
+    const vmax = Math.max(W, H) / 100;
+    const e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; // power1.inOut
+    ctx.clearRect(0, 0, W, H);
+    CLOUDS.forEach((c, i) => {
+      const img = cloudImgs.current[i];
+      if (!img?.complete || !img.naturalWidth) return;
+      const alpha = 1 + (c.toOpacity - 1) * e;
+      if (alpha <= 0.01) return;
+      const scale = 1 + (c.toScale - 1) * e;
+      const w = c.w * vmax * scale, h = (w * 9) / 16;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate((c.cx / 100) * W + c.toX * vmax * e, (c.cy / 100) * H + c.toY * vmax * e);
+      if (c.flip) ctx.scale(-1, 1);
+      ctx.drawImage(img, -w / 2, -h / 2, w, h);
+      ctx.restore();
+    });
+  }, []);
+
+  useEffect(() => {
+    const cv = cloudCanvas.current;
+    if (!cv) return;
+    const resize = () => {
+      // Cap the resolution: soft clouds look the same and cost far less.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      cv.width = Math.round(cv.clientWidth * dpr);
+      cv.height = Math.round(cv.clientHeight * dpr);
+      drawClouds(cloudT.current);
+    };
+    cloudImgs.current = CLOUDS.map((c) => {
+      const img = new Image();
+      img.src = `/map/clouds/cloud-${c.src}.webp`;
+      img.onload = () => drawClouds(cloudT.current);
+      return img;
+    });
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, [drawClouds]);
+
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -130,16 +182,11 @@ export default function InteractiveMap() {
         .fromTo(zoom.current, { scale: 1.3 }, { scale: 1, duration: 1, ease: "power1.out" }, 0)
         .fromTo(".map-hint", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.12 }, 0.88);
 
-      gsap.utils.toArray<HTMLElement>(".cloud").forEach((el, i) => {
-        const c = CLOUDS[i];
-        const flip = c.flip ? -1 : 1;
-        gsap.set(el, { xPercent: -50, yPercent: -50, scaleX: flip });
-        tl.to(
-          el,
-          { x: `${c.toX}vmax`, y: `${c.toY}vmax`, scaleX: c.toScale * flip, scaleY: c.toScale, autoAlpha: c.toOpacity, duration: 0.95, ease: "power1.inOut" },
-          0.05,
-        );
-      });
+      // Clouds are drawn on one canvas (see drawClouds): a progress value
+      // from 0 to 1 follows the scroll.
+      const prog = { t: 0 };
+      tl.to(prog, { t: 1, duration: 0.95, onUpdate: () => drawClouds(prog.t) }, 0.05);
+      drawClouds(0);
     },
     { scope: section },
   );
@@ -272,22 +319,7 @@ export default function InteractiveMap() {
         </div>
 
         <div className="map-fog" />
-        <div className="map-clouds" aria-hidden>
-          {CLOUDS.map((c, i) => (
-            // The <img> itself is the animated layer: the browser then keeps the
-            // 1600px picture as its texture instead of painting a screen-sized
-            // (×2 on retina) copy per cloud, which ran the GPU out of memory
-            // and showed as missing rectangles while scrolling.
-            <img
-              key={i}
-              className="cloud"
-              src={`/map/clouds/cloud-${c.src}.webp`}
-              alt=""
-              decoding="async"
-              style={{ left: `${c.cx}%`, top: `${c.cy}%`, width: `${c.w}vmax` }}
-            />
-          ))}
-        </div>
+        <canvas ref={cloudCanvas} className="map-clouds" aria-hidden />
 
         <div className="map-intro">
           <div className="intro-icon">
